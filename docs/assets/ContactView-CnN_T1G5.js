@@ -1,0 +1,1 @@
+import{_ as t,c as a,a as n,o as c}from"./index-BhlUGIwW.js";const o={};function r(s,e){return c(),a("div",null,e[0]||(e[0]=[n("h1",null,"Contacto",-1),n("div",{class:"alert alert-warning"},"Página en construcción",-1)]))}const i=t(o,[["render",r]]);export{i as default};

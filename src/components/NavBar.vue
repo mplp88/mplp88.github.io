@@ -1,5 +1,12 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min'
+
+const collapse = () => {
+  const menuToggle = document.getElementById('navbarCollapse')
+  const bsCollapse = bootstrap.Collapse.getOrCreateInstance(menuToggle, { toggle: false })
+  bsCollapse.toggle()
+}
 </script>
 
 <template>
@@ -16,13 +23,13 @@ import { RouterLink } from 'vue-router'
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav">
         <div class="nav-item">
-          <RouterLink class="nav-link" to="/">Inicio</RouterLink>
+          <RouterLink class="nav-link" @click="collapse" to="/">Inicio</RouterLink>
         </div>
         <div class="nav-item">
-          <RouterLink class="nav-link" to="/counter">Contador</RouterLink>
+          <RouterLink class="nav-link" @click="collapse" to="/counter">Contador</RouterLink>
         </div>
         <div class="nav-item">
-          <RouterLink class="nav-link" to="/projects">Proyectos</RouterLink>
+          <RouterLink class="nav-link" @click="collapse" to="/projects">Proyectos</RouterLink>
         </div>
         <!-- nav dropdown example 
       <div class="nav-item dropdown">
@@ -41,7 +48,7 @@ import { RouterLink } from 'vue-router'
       </div>
       -->
         <div class="nav-item">
-          <RouterLink class="nav-link" to="/contact">Contacto</RouterLink>
+          <RouterLink class="nav-link" @click="collapse" to="/contact">Contacto</RouterLink>
         </div>
       </div>
     </div>

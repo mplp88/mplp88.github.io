@@ -7,7 +7,7 @@ const year = ref(new Date().getFullYear())
 <template>
   <hr />
   <div class="row my-2">
-    <div class="col-6 offset-3 text-center">&copy; Copyright Martín Ponce - {{ year }}</div>
+    <div class="col-12 text-center">&copy; Copyright Martín Ponce - {{ year }}</div>
   </div>
   <div class="row my-2">
     <div class="col-2 offset-4 text-center">

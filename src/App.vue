@@ -10,6 +10,7 @@ import FooterComponent from './components/FooterComponent.vue'
   </header>
 
   <RouterView class="container" />
+
   <footer class="container-fluid">
     <FooterComponent></FooterComponent>
   </footer>

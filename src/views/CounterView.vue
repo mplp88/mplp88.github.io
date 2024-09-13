@@ -8,9 +8,9 @@ const counterStore = useCounterStore()
   <main>
     <h1>Contador</h1>
     <h3>Esta contador guarda el estado con Pinia</h3>
-    <p>Count: {{ counterStore.count }}</p>
-    <p>Double count: {{ counterStore.doubleCount }}</p>
-    <button class="btn btn-primary" @click="counterStore.increment">Increment</button>
+    <p>Cuenta: {{ counterStore.count }}</p>
+    <p>Cuenta doble: {{ counterStore.doubleCount }}</p>
+    <button class="btn btn-primary" @click="counterStore.increment">Incrementar</button>
     <br />
   </main>
 </template>

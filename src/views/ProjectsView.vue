@@ -4,9 +4,9 @@
   <main>
     <h1>Proyectos</h1>
     <div class="row">
-      <img src="/src/assets/projects.webp" />
+      <div class="col-sm-12 col-lg-6 offset-lg-3">
+        <img src="/src/assets/projects.webp" />
+      </div>
     </div>
   </main>
 </template>
-
-<style scoped></style>
