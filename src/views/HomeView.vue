@@ -16,10 +16,11 @@ const greeting = () => {
 
 <template>
   <main>
-    <h1>Home View</h1>
+    <h1>Inicio</h1>
+    <h3>Prueba de ractividad</h3>
     <div class="row mb-3">
       <div class="col-6">
-        <input class="form-control" v-model="name" placeholder="Enter your name" />
+        <input class="form-control" v-model="name" placeholder="Ingrese su nombre" />
       </div>
     </div>
     <p>{{ greeting() }}</p>
