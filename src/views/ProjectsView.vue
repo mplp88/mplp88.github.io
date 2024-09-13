@@ -3,6 +3,10 @@
 <template>
   <main>
     <h1>Proyectos</h1>
-    <img src="/src/assets/projects.webp" />
+    <div class="row">
+      <img src="/src/assets/projects.webp" />
+    </div>
   </main>
 </template>
+
+<style scoped></style>
