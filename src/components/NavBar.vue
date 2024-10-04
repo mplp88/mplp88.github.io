@@ -3,9 +3,11 @@ import { RouterLink } from 'vue-router'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min'
 
 const collapse = () => {
-  const menuToggle = document.getElementById('navbarCollapse')
-  const bsCollapse = bootstrap.Collapse.getOrCreateInstance(menuToggle, { toggle: false })
-  bsCollapse.toggle()
+  if (window.innerWidth <= 992) {
+    const menuToggle = document.getElementById('navbarCollapse')
+    const bsCollapse = bootstrap.Collapse.getOrCreateInstance(menuToggle, { toggle: false })
+    bsCollapse.toggle()
+  }
 }
 </script>
 
