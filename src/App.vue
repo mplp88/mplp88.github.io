@@ -5,15 +5,13 @@ import FooterComponent from './components/FooterComponent.vue'
 </script>
 
 <template>
-  <header class="container-fluid">
+  <header>
     <NavBar></NavBar>
   </header>
-
-  <RouterView class="container" />
-
-  <footer class="container-fluid">
-    <FooterComponent></FooterComponent>
-  </footer>
+  <main class="container" style="padding-bottom: 120px">
+    <RouterView />
+  </main>
+  <FooterComponent></FooterComponent>
 </template>
 
 <style scoped></style>

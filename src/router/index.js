@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CounterView from '@/views/CounterView.vue'
 import ProjectsView from '@/views/ProjectsView.vue'
+import TodoList from '@/components/projects/todo-list/TodoList.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/projects',
       name: 'projects',
       component: ProjectsView
+    },
+    {
+      path: '/projects/todo-list',
+      name: 'todoList',
+      component: TodoList
     },
     {
       path: '/contact',

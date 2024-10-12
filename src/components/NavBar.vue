@@ -12,7 +12,7 @@ const collapse = () => {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a href="/" class="navbar-brand">mplp88.github.io</a>
     <button
       class="navbar-toggler"
