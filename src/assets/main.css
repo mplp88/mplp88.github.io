@@ -1,0 +1,13 @@
+.todo-description:hover {
+  background-color: #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.project {
+  transition: transform 0.1s ease-in-out;
+}
+
+.project:hover {
+  transform: scale(1.05);
+}

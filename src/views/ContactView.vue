@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <h1>Contacto</h1>
-    <div class="alert alert-warning">Página en construcción</div>
-  </div>
+  <h1>Contacto</h1>
+  <div class="alert alert-warning">Página en construcción</div>
 </template>
 
 <style></style>
