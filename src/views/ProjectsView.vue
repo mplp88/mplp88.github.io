@@ -4,8 +4,8 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <h1>Proyectos</h1>
-  <div class="row row-cols-sm-1 row-cols-3 g-3">
-    <div class="col col-md-4">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+    <div class="col-10 offset-1 col-md-6 col-lg-4">
       <RouterLink
         to="/projects/todo-list"
         class="card shadow project"
