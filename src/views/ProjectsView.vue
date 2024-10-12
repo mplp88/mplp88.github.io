@@ -11,7 +11,7 @@ import { RouterLink } from 'vue-router'
         class="card shadow project"
         style="text-decoration: none"
       >
-        <img :src="'/src/assets/todo_list.png'" alt="Todo List Preview" class="card-img-top" />
+        <img src="/src/assets/todo_list.png" alt="Todo List Preview" class="card-img-top" />
         <div class="card-body">
           <h4 class="card-title">Todo List</h4>
           <div class="card-text">Aplicación de lista de tareas con guardado en localStorage</div>
