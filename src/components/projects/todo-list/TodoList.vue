@@ -129,26 +129,24 @@ onMounted(() => {
         <div class="row my-3">
           <div class="offset-2 col-8">
             <label>{{ editingId ? 'Editar' : 'Nuevo' }}</label>
-            <input
+            <div class="input-group has-validation">
+              <input
               id="new-todo-description"
               type="text"
               class="form-control"
               :maxlength="maxLength"
               v-model.trim="newTodoDescription"
               required
-            />
-            <small class="invalid-feedback">Campo obligatorio</small>
+              />
+              <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-check"></i>
+              </button>
+              <button type="button" class="btn btn-danger" v-if="editingId" @click.prevent="cancelEdition">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+              <small class="invalid-feedback">Campo obligatorio</small>
+            </div>
             <small>{{ newTodoDescription.length }} / {{ maxLength }}</small>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="offset-lg-3 offset-1 col-3">
-            <button type="submit" class="btn btn-primary">Agregar</button>
-          </div>
-          <div v-if="editingId" class="col-3 offset-2 offset-lg-1">
-            <button type="button" class="btn btn-danger" @click.prevent="cancelEdition">
-              Cancelar
-            </button>
           </div>
         </div>
       </form>
