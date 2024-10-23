@@ -13,7 +13,7 @@ import { RouterLink } from 'vue-router'
       >
         <img src="/src/assets/todo_list.png" alt="Todo List Preview" class="card-img-top" />
         <div class="card-body">
-          <h4 class="card-title">Todo List</h4>
+          <h4 class="card-title">Lista de tareas</h4>
           <div class="card-text">Aplicación de lista de tareas con guardado en localStorage</div>
         </div>
       </RouterLink>
