@@ -21,8 +21,7 @@ const sendMessage = () => {
   wasValidated.value = false
   loading.value = true
 
-  const apiUrl = import.meta.env.VITE_API_URL
-  fetch(`${apiUrl}/email`, {
+  fetch(`https://portfolio-api-pi-eight.vercel.app/email`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json'
