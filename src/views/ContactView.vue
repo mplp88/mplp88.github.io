@@ -21,7 +21,7 @@ const sendMessage = () => {
   wasValidated.value = false
   loading.value = true
 
-  fetch(`https://portfolio-api-pi-eight.vercel.app/email`, {
+  fetch(`https://portfolio-api.martinponce.com.ar/email`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json'
