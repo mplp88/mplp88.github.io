@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import CounterView from '@/views/CounterView.vue'
 import ProjectsView from '@/views/ProjectsView.vue'
 import TodoList from '@/components/projects/todo-list/TodoList.vue'
+import PokedexComponent from '@/components/projects/pokedex/PokedexComponent.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/projects/todo-list',
       name: 'todoList',
       component: TodoList
+    },
+    {
+      path: '/projects/pokedex',
+      name: 'pokedex',
+      component: PokedexComponent
     },
     {
       path: '/contact',
