@@ -9,6 +9,11 @@ const isValidEmail = ref(true)
 const isValidMessage = ref(true)
 const invalidEmailMessage = ref('Campo requerido')
 
+const apiUrl =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : 'https://portfolio-api.martinponce.com.ar/'
+
 const formInfo = ref({
   name: '',
   email: '',
@@ -21,7 +26,7 @@ const sendMessage = () => {
   wasValidated.value = false
   loading.value = true
 
-  fetch(`https://portfolio-api.martinponce.com.ar/email`, {
+  fetch(`${apiUrl}/email`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json'

@@ -14,6 +14,11 @@ const showChat = ref(false)
 const chatId = ref('')
 const receivingMessage = ref(false)
 
+const apiUrl =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : 'https://portfolio-api.martinponce.com.ar/'
+
 const sendMessage = () => {
   messages.value.push({
     sender: 'Usted',
@@ -21,7 +26,7 @@ const sendMessage = () => {
   })
 
   //TODO cambiar for fetch
-  fetch(`http://localhost:3000/chatbot/sendMessage/${chatId.value}`, {
+  fetch(`${apiUrl}/chatbot/sendMessage/${chatId.value}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -44,7 +49,7 @@ const initChat = () => {
     chatInitialized.value = true
     receivingMessage.value = true
 
-    fetch(`http://localhost:3000/chatbot/init/${chatId.value}`)
+    fetch(`${apiUrl}/chatbot/init/${chatId.value}`)
       .then((res) => {
         if (!res.ok) {
           throw 'Error contactando al chatbot'
@@ -66,7 +71,7 @@ const closeChat = () => {
 }
 
 onMounted(() => {
-  fetch('http://localhost:3000/chatbot')
+  fetch(`${apiUrl}/chatbot`)
     .then((res) => {
       if (!res.ok) {
         throw 'Error contactando al chatbot'
