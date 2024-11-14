@@ -17,7 +17,7 @@ const receivingMessage = ref(false)
 const apiUrl =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'https://portfolio-api.martinponce.com.ar/'
+    : 'https://portfolio-api.martinponce.com.ar'
 
 const sendMessage = () => {
   messages.value.push({

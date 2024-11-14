@@ -12,7 +12,7 @@ const invalidEmailMessage = ref('Campo requerido')
 const apiUrl =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'https://portfolio-api.martinponce.com.ar/'
+    : 'https://portfolio-api.martinponce.com.ar'
 
 const formInfo = ref({
   name: '',
