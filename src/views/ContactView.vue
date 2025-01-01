@@ -158,6 +158,7 @@ const dismissMessage = () => {
           }"
           placeholder="Mensaje..."
           v-model.trim="formInfo.message"
+          row="50"
           required
         ></textarea>
         <label for="nombre">Mensaje</label>
