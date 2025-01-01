@@ -59,6 +59,8 @@ const sendMessage = () => {
         message: 'Ocurrió un error enviando el mensaje'
       })
       console.error(err)
+      chatBotOnline.value = false
+      setTimeout(connectToChat, 30 * 1000)
     })
 
   message.value = ''
@@ -72,6 +74,7 @@ const scrollToBottom = () => {
 
 const initChat = () => {
   if (!chatBotOnline.value) {
+    connectToChat()
     return
   }
 
@@ -103,21 +106,24 @@ const closeChat = () => {
 }
 
 const connectToChat = () => {
-  fetch(`${apiUrl}/chatbot`)
-    .then((res) => {
-      if (!res.ok) {
-        throw 'Error contactando al chatbot'
-      }
-      chatBotOnline.value = true
-      return res.json()
-    })
-    .then((json) => {
-      chatId.value = json.chatId
-    })
-    .catch((err) => {
-      chatBotOnline.value = false
-      console.error(err)
-    })
+  if (!chatBotOnline.value) {
+    fetch(`${apiUrl}/chatbot`)
+      .then((res) => {
+        if (!res.ok) {
+          throw 'Error contactando al chatbot'
+        }
+        chatBotOnline.value = true
+        return res.json()
+      })
+      .then((json) => {
+        chatId.value = json.chatId
+      })
+      .catch((err) => {
+        setTimeout(connectToChat, 30 * 1000)
+        chatBotOnline.value = false
+        console.error(err)
+      })
+  }
 }
 
 onMounted(() => {
@@ -196,7 +202,7 @@ watch(messages, scrollToBottom, { deep: true })
             placeholder="Mensaje..."
             autofocus
             required
-            :disabled="{ disabled: !chatBotOnline }"
+            :disabled="!chatBotOnline"
           />
           <button class="btn btn-primary" :class="{ disabled: !chatBotOnline }">
             <i class="fa-solid fa-arrow-right"></i>
