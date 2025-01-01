@@ -1,7 +1,10 @@
 .todo-description:hover {
-  background-color: #ddd;
-  border-radius: 5px;
   cursor: pointer;
+}
+
+.todo-description.done {
+  color: #aaa;
+  text-decoration: line-through;
 }
 
 .project {
