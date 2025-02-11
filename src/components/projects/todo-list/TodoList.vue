@@ -76,6 +76,50 @@ const cancelEdition = () => {
   newTodoDescription.value = ''
 }
 
+const someDone = () => {
+  return todoList.value.some((x) => x.done)
+}
+
+const isListEmpty = () => {
+  return todoList.value.length == 0
+}
+
+const clearDone = () => {
+  SwalMixins.danger
+    .fire({
+      title: '¿Estás seguro?',
+      text: 'Estás a punto de eliminar todos elementos marcados como hechos',
+      icon: 'warning',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        todoList.value = todoList.value.filter((x) => !x.done)
+        saveToLocalStorage()
+      }
+    })
+}
+
+const clearAll = () => {
+  SwalMixins.danger
+    .fire({
+      title: '¿Estás seguro?',
+      text: 'Estás a punto de eliminar todos elementos de la lista',
+      icon: 'warning',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        todoList.value = []
+        saveToLocalStorage()
+      }
+    })
+}
+
 const saveToLocalStorage = () => {
   localStorage.setItem('todoList', JSON.stringify(todoList.value))
   localStorage.setItem('nextId', nextId.value.toString())
@@ -108,7 +152,7 @@ onMounted(() => {
         :class="{ 'was-validated': wasValidated }"
         novalidate
       >
-        <div class="row my-3">
+        <div class="row mb-1">
           <div class="offset-2 col-8">
             <label>{{ editingId ? 'Editar' : 'Nuevo' }}</label>
             <div class="input-group has-validation">
@@ -136,9 +180,33 @@ onMounted(() => {
             <small>{{ newTodoDescription.length }} / {{ maxLength }}</small>
           </div>
         </div>
+        <div class="row mb-1">
+          <div class="col-6 offset-6 col-lg-3 offset-lg-9 text-center">
+            <button
+              type="button"
+              class="btn btn-danger"
+              :class="{ disabled: isListEmpty() }"
+              @click="clearAll"
+            >
+              Limpiar lista
+            </button>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-9 offset-3 col-lg-4 offset-lg-8 text-center">
+            <button
+              type="button"
+              class="btn btn-danger"
+              :class="{ disabled: !someDone() }"
+              @click="clearDone"
+            >
+              Eliminar completados
+            </button>
+          </div>
+        </div>
       </form>
     </div>
-    <div>
+    <div class="col-12 offset-lg-2 col-lg-8">
       <div class="row">
         <div class="col-8">
           <strong>Descripción</strong>

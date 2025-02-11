@@ -19,7 +19,7 @@ const wasValidated = ref(false)
 
 const apiUrl =
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000'
+    ? 'http://192.168.1.103:3000'
     : 'https://portfolio-api.martinponce.com.ar'
 
 const sendMessage = () => {
