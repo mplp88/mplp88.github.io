@@ -148,7 +148,7 @@ onMounted(() => {
     <div class="col-10 col-lg-6 offset-1 offset-lg-3">
       <form
         @submit.prevent="handleSubmit"
-        class="card shadow mb-3 needs-validation"
+        class="card shadow mb-3 p-1 needs-validation"
         :class="{ 'was-validated': wasValidated }"
         novalidate
       >
@@ -181,7 +181,7 @@ onMounted(() => {
           </div>
         </div>
         <div class="row mb-1">
-          <div class="col-6 offset-6 col-lg-3 offset-lg-9 text-center">
+          <div class="col-6 offset-6 col-lg-3 offset-lg-9 mr-1 text-end">
             <button
               type="button"
               class="btn btn-danger"
@@ -193,7 +193,7 @@ onMounted(() => {
           </div>
         </div>
         <div class="row mb-1">
-          <div class="col-9 offset-3 col-lg-4 offset-lg-8 text-center">
+          <div class="col-9 offset-3 col-lg-4 offset-lg-8 mr-1 text-end">
             <button
               type="button"
               class="btn btn-danger"
