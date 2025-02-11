@@ -1,5 +1,5 @@
 <script setup>
-import Swal from 'sweetalert2'
+import SwalMixins from '@/components/shared/sweetalert/swalBs'
 import { ref, onMounted } from 'vue'
 
 const nextId = ref(1)
@@ -8,22 +8,6 @@ const newTodoDescription = ref('')
 const editingId = ref(0)
 const maxLength = ref(50)
 const wasValidated = ref(false)
-
-// const swalBs = Swal.mixin({
-//   customClass: {
-//     confirmButton: 'btn btn-primary mx-3',
-//     cancelButton: 'btn btn-danger mx-3'
-//   },
-//   buttonsStyling: false
-// })
-
-const swalBsDanger = Swal.mixin({
-  customClass: {
-    confirmButton: 'btn btn-danger mx-3',
-    cancelButton: 'btn btn-primary mx-3'
-  },
-  buttonsStyling: false
-})
 
 const handleSubmit = () => {
   wasValidated.value = true
@@ -53,11 +37,9 @@ const handleSubmit = () => {
 }
 
 const markAsDone = (id) => {
-  todoList.value.forEach((todo) => {
-    if (todo.id == id) {
-      todo.done = !todo.done
-    }
-  })
+  const todo = todoList.value.find((t) => t.id == id)
+  todo.done = !todo.done
+  saveToLocalStorage()
 }
 
 const deleteTodo = (id) => {
@@ -65,7 +47,7 @@ const deleteTodo = (id) => {
     cancelEdition()
   }
 
-  swalBsDanger
+  SwalMixins.danger
     .fire({
       title: '¿Estás seguro?',
       text: 'Estás a punto de eliminar este elemento',
@@ -102,7 +84,7 @@ const saveToLocalStorage = () => {
 const getFromLocalStorage = () => {
   const tl = JSON.parse(localStorage.getItem('todoList'))
   const nId = JSON.parse(localStorage.getItem('nextId'))
-  console.log(tl)
+
   if (tl) {
     todoList.value = tl
   }
@@ -119,7 +101,7 @@ onMounted(() => {
 
 <template>
   <div class="row mt-3">
-    <div class="col-8 col-lg-6 offset-2 offset-lg-3">
+    <div class="col-10 col-lg-6 offset-1 offset-lg-3">
       <form
         @submit.prevent="handleSubmit"
         class="card shadow mb-3 needs-validation"
@@ -131,17 +113,22 @@ onMounted(() => {
             <label>{{ editingId ? 'Editar' : 'Nuevo' }}</label>
             <div class="input-group has-validation">
               <input
-              id="new-todo-description"
-              type="text"
-              class="form-control"
-              :maxlength="maxLength"
-              v-model.trim="newTodoDescription"
-              required
+                id="new-todo-description"
+                type="text"
+                class="form-control"
+                :maxlength="maxLength"
+                v-model.trim="newTodoDescription"
+                required
               />
               <button type="submit" class="btn btn-primary">
                 <i class="fa-solid fa-check"></i>
               </button>
-              <button type="button" class="btn btn-danger" v-if="editingId" @click.prevent="cancelEdition">
+              <button
+                type="button"
+                class="btn btn-danger"
+                v-if="editingId"
+                @click.prevent="cancelEdition"
+              >
                 <i class="fa-solid fa-xmark"></i>
               </button>
               <small class="invalid-feedback">Campo obligatorio</small>
@@ -150,6 +137,8 @@ onMounted(() => {
           </div>
         </div>
       </form>
+    </div>
+    <div>
       <div class="row">
         <div class="col-8">
           <strong>Descripción</strong>
@@ -163,9 +152,13 @@ onMounted(() => {
         leave-active-class="animate__animated animate__fadeOut"
       >
         <div class="row my-1" v-for="item in todoList" :key="item.id">
-          <div class="col-lg-8 col-6" @click="markAsDone(item.id)">
-            <div class="w-100 h-100 todo-description">
-              <input type="checkbox" v-model="item.done" />
+          <div class="col-1" @click="markAsDone(item.id)">
+            <input class="d-none" type="checkbox" v-model="item.done" />
+            <span v-if="item.done"><i class="fa-regular fa-square-check"></i></span>
+            <span v-else><i class="fa-regular fa-square"></i></span>
+          </div>
+          <div class="col-lg-7 col-5" @click="markAsDone(item.id)">
+            <div class="w-100 h-100 todo-description" :class="{ done: item.done }">
               {{ item.description }}
             </div>
           </div>
