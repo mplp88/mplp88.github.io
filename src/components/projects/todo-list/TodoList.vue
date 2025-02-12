@@ -206,40 +206,42 @@ onMounted(() => {
         </div>
       </form>
     </div>
-    <div class="col-12 offset-lg-2 col-lg-8">
-      <div class="row">
-        <div class="col-8">
-          <strong>Descripción</strong>
-        </div>
-        <div class="col-4 text-end">
-          <strong>Acciones</strong>
-        </div>
+    <Transition enter-active-class="animate__animated animate__fadeIn">
+      <div class="col-12 offset-lg-2 col-lg-8 text-center mt-3" v-if="!todoList.length">
+        <h3>La lista está vacía</h3>
       </div>
-      <TransitionGroup
-        enter-active-class="animate__animated animate__fadeIn"
-        leave-active-class="animate__animated animate__fadeOut"
-      >
-        <div class="row my-1" v-for="item in todoList" :key="item.id">
-          <div class="col-1" @click="markAsDone(item.id)">
-            <input class="d-none" type="checkbox" v-model="item.done" />
-            <span v-if="item.done"><i class="fa-regular fa-square-check"></i></span>
-            <span v-else><i class="fa-regular fa-square"></i></span>
+      <div class="col-12 offset-lg-2 col-lg-8" v-else>
+        <div class="row">
+          <div class="col-8">
+            <strong>Descripción</strong>
           </div>
-          <div class="col-lg-7 col-5" @click="markAsDone(item.id)">
-            <div class="w-100 h-100 todo-description" :class="{ done: item.done }">
-              {{ item.description }}
+          <div class="col-4 text-end">
+            <strong>Acciones</strong>
+          </div>
+        </div>
+        <TransitionGroup enter-active-class="animate__animated animate__fadeInUp">
+          <div class="row my-1" v-for="item in todoList" :key="item.id">
+            <div class="col-1" @click="markAsDone(item.id)">
+              <input class="d-none" type="checkbox" v-model="item.done" />
+              <span v-if="item.done"><i class="fa-regular fa-square-check"></i></span>
+              <span v-else><i class="fa-regular fa-square"></i></span>
+            </div>
+            <div class="col-lg-7 col-5" @click="markAsDone(item.id)">
+              <div class="w-100 h-100 todo-description" :class="{ done: item.done }">
+                {{ item.description }}
+              </div>
+            </div>
+            <div class="col-lg-4 col-6 text-end">
+              <button class="btn btn-primary" @click="editTodo(item.id)">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button class="btn btn-danger" @click="deleteTodo(item.id)">
+                <i class="fa-solid fa-trash"></i>
+              </button>
             </div>
           </div>
-          <div class="col-lg-4 col-6 text-end">
-            <button class="btn btn-primary" @click="editTodo(item.id)">
-              <i class="fa-solid fa-pen"></i>
-            </button>
-            <button class="btn btn-danger" @click="deleteTodo(item.id)">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </div>
-        </div>
-      </TransitionGroup>
-    </div>
+        </TransitionGroup>
+      </div>
+    </Transition>
   </div>
 </template>
