@@ -153,7 +153,7 @@ onMounted(() => {
         novalidate
       >
         <div class="row mb-1">
-          <div class="offset-2 col-8">
+          <div class="col-10 offset-1 offset-lg-2 col-lg-8">
             <label>{{ editingId ? 'Editar' : 'Nuevo' }}</label>
             <div class="input-group has-validation">
               <input
