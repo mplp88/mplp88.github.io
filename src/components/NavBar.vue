@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min'
+import { useCounterStore } from '@/stores/counter'
 
 const collapse = () => {
   if (window.innerWidth <= 992) {
@@ -9,6 +10,7 @@ const collapse = () => {
     bsCollapse.toggle()
   }
 }
+const counterStore = useCounterStore()
 </script>
 
 <template>
@@ -28,7 +30,9 @@ const collapse = () => {
           <RouterLink class="nav-link" @click="collapse" to="/">Inicio</RouterLink>
         </div>
         <div class="nav-item">
-          <RouterLink class="nav-link" @click="collapse" to="/counter">Contador</RouterLink>
+          <RouterLink class="nav-link" @click="collapse" to="/counter"
+            >Contador <span v-if="counterStore.count">({{ counterStore.count }})</span></RouterLink
+          >
         </div>
         <div class="nav-item">
           <RouterLink class="nav-link" @click="collapse" to="/projects">Proyectos</RouterLink>

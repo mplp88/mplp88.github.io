@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 
-const name = ref('World')
+const name = ref('')
 const greeting = () => {
-  let greeting = 'Hello'
+  let greeting = 'Hola'
 
   if (name.value) {
     greeting += `, ${name.value}`
@@ -24,7 +24,15 @@ const greeting = () => {
   </div>
   <div class="row">
     <div class="col-lg-4 col-sm-12">
-      <p>{{ greeting() }}</p>
+      <h3>{{ greeting() }}</h3>
+      <p>
+        Bienvenido a mi página de portfolio, en ella encontrará algunos proyectos en los que estoy o
+        estuve trabajando, así como también una opción para ponerse en contacto conmigo
+      </p>
+      <p>
+        Utilice la barra de navegación de arriba para poder navegar libremente por la página,
+        disfrute de su estadía
+      </p>
     </div>
   </div>
 </template>
