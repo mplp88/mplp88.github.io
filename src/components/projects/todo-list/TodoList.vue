@@ -5,13 +5,7 @@ import { Confetti } from '@/assets/confetti.min'
 import { ref, onMounted, watch } from 'vue'
 
 const currentList = ref(-1)
-const lists = ref([
-  {
-    id: 123,
-    description: 'Prueba2',
-    items: []
-  }
-])
+const lists = ref([])
 const todoList = ref({
   id: null,
   description: null,
