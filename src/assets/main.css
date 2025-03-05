@@ -1,3 +1,7 @@
+.todo-description {
+  line-break: anywhere;
+}
+
 .todo-description:hover {
   cursor: pointer;
 }

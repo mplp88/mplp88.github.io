@@ -197,14 +197,49 @@ const deleteList = (listId) => {
     })
 }
 
+const renameList = (listId) => {
+  SwalMixins.danger
+    .fire({
+      title: 'Renombrar lista',
+      text: 'Escriba la nueva descripción de la lista',
+      icon: 'question',
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      input: 'text'
+    })
+    .then((result) => {
+      if (result.isConfirmed && result.value) {
+        const list = lists.value.find((l) => l.id == listId)
+        list.description = result.value
+        saveToLocalStorage()
+      }
+    })
+}
+
+function setupConfetti() {
+  confetti.value = new Confetti('confetti')
+  confetti.value.setCount(75)
+  confetti.value.setSize(1)
+  confetti.value.setPower(25)
+  confetti.value.setFade(true)
+  confetti.value.destroyTarget(false)
+}
+
 const saveToLocalStorage = () => {
   localStorage.setItem('lists', JSON.stringify(lists.value))
+  localStorage.setItem('lastUsedList', currentList.value)
 }
 
 const getFromLocalStorage = () => {
   const _lists = JSON.parse(localStorage.getItem('lists'))
   if (_lists) {
     lists.value = _lists
+  }
+
+  const lastUsedList = localStorage.getItem('lastUsedList')
+  if (lastUsedList) {
+    currentList.value = lastUsedList
   }
 }
 
@@ -214,24 +249,15 @@ watch(currentList, () => {
   } else {
     todoList.value = lists.value.find((l) => l.id == currentList.value)
     document.querySelector('#new-todo-description').focus()
+    saveToLocalStorage()
   }
 })
 
 onMounted(() => {
   console.log('mounted')
   getFromLocalStorage()
-  if (lists.value.length) {
-    currentList.value = lists.value[0].id
-  } else {
-    currentList.value = -1
-  }
 
-  confetti.value = new Confetti('confetti')
-  confetti.value.setCount(75)
-  confetti.value.setSize(1)
-  confetti.value.setPower(25)
-  confetti.value.setFade(true)
-  confetti.value.destroyTarget(false)
+  setupConfetti()
 })
 </script>
 
@@ -305,7 +331,7 @@ onMounted(() => {
       </form>
     </div>
     <div class="row mb-2">
-      <div class="col-8 col-md-4">
+      <div class="col-6">
         <select class="form-control" v-model="currentList">
           <option value="-1" v-if="lists.length == 0">No hay listas</option>
           <option value="-1" v-else>Seleccione una lista</option>
@@ -314,19 +340,36 @@ onMounted(() => {
           </option>
         </select>
       </div>
-      <div class="col-1 offset-1 offset-md-6">
-        <button
-          class="btn btn-danger mr-3"
-          @click="deleteList(currentList)"
-          v-if="currentList != -1"
-        >
-          <i class="fa-solid fa-trash"></i>
-        </button>
-      </div>
-      <div class="col-1 offset-1 offset-md-0">
-        <button class="btn btn-primary mr-3" @click="newList">
-          <i class="fa-solid fa-plus"></i>
-        </button>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4 col-md-2 offset-md-6">
+            <Transition enter-active-class="animate__animated animate__fadeIn">
+              <button
+                class="btn btn-danger mr-3"
+                @click="deleteList(currentList)"
+                v-if="currentList != -1"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </Transition>
+          </div>
+          <div class="col-4 col-md-2">
+            <Transition enter-active-class="animate__animated animate__fadeIn">
+              <button
+                class="btn btn-primary mr-3"
+                @click="renameList(currentList)"
+                v-if="currentList != -1"
+              >
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </Transition>
+          </div>
+          <div class="col-4 col-md-2">
+            <button class="btn btn-primary mr-3" @click="newList">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <Transition enter-active-class="animate__animated animate__fadeIn">
@@ -349,18 +392,24 @@ onMounted(() => {
               <span v-if="item.done"><i class="fa-regular fa-square-check"></i></span>
               <span v-else><i class="fa-regular fa-square"></i></span>
             </div>
-            <div class="col-lg-7 col-5" @click="markAsDone(item.id)">
+            <div class="col-7 col-md-8" @click="markAsDone(item.id)">
               <div class="w-100 h-100 todo-description" :class="{ done: item.done }">
                 {{ item.description }}
               </div>
             </div>
-            <div class="col-lg-4 col-6 text-end">
-              <button class="btn btn-primary" @click="editTodo(item.id)">
-                <i class="fa-solid fa-pen"></i>
-              </button>
-              <button class="btn btn-danger" @click="deleteTodo(item.id)">
-                <i class="fa-solid fa-trash"></i>
-              </button>
+            <div class="col-4 col-md-3">
+              <div class="row">
+                <div class="col-5 col-md-3 offset-md-6">
+                  <button class="btn btn-primary" @click="editTodo(item.id)">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                </div>
+                <div class="col-5 col-md-3">
+                  <button class="btn btn-danger" @click="deleteTodo(item.id)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </TransitionGroup>
