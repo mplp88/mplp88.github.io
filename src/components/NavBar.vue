@@ -13,7 +13,7 @@ const collapse = () => {
 
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="/" class="navbar-brand">mplp88.github.io</a>
+    <a href="/" class="navbar-brand">Portfolio Martín Ponce</a>
     <button
       class="navbar-toggler"
       type="button"

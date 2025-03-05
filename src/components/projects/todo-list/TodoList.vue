@@ -1,31 +1,26 @@
 <script setup>
-import Swal from 'sweetalert2'
-import { ref, onMounted } from 'vue'
+import SwalMixins from '@/components/shared/sweetalert/swalBs'
+import { v4 as uuidv4 } from 'uuid'
+import { Confetti } from '@/assets/confetti.min'
+import { ref, onMounted, watch } from 'vue'
 
-const nextId = ref(1)
-const todoList = ref([])
+const currentList = ref(-1)
+const lists = ref([])
+const todoList = ref({
+  id: null,
+  description: null,
+  items: []
+})
 const newTodoDescription = ref('')
 const editingId = ref(0)
 const maxLength = ref(50)
 const wasValidated = ref(false)
 
-// const swalBs = Swal.mixin({
-//   customClass: {
-//     confirmButton: 'btn btn-primary mx-3',
-//     cancelButton: 'btn btn-danger mx-3'
-//   },
-//   buttonsStyling: false
-// })
-
-const swalBsDanger = Swal.mixin({
-  customClass: {
-    confirmButton: 'btn btn-danger mx-3',
-    cancelButton: 'btn btn-primary mx-3'
-  },
-  buttonsStyling: false
-})
+let confetti = ref({})
 
 const handleSubmit = () => {
+  if (currentList.value == -1) return
+
   wasValidated.value = true
 
   if (!newTodoDescription.value) {
@@ -33,31 +28,49 @@ const handleSubmit = () => {
   }
 
   const newTodo = {
-    id: nextId.value,
+    id: uuidv4(),
     description: newTodoDescription.value,
     done: false
   }
 
   if (!editingId.value) {
-    todoList.value.push(newTodo)
+    todoList.value.items.push(newTodo)
   } else {
-    const todo = todoList.value.find((t) => t.id == editingId.value)
+    const todo = todoList.value.items.find((t) => t.id == editingId.value)
     todo.description = newTodoDescription.value
     editingId.value = 0
   }
 
   saveToLocalStorage()
   newTodoDescription.value = ''
-  nextId.value++
   wasValidated.value = false
 }
 
 const markAsDone = (id) => {
-  todoList.value.forEach((todo) => {
-    if (todo.id == id) {
-      todo.done = !todo.done
-    }
-  })
+  const todo = todoList.value.items.find((t) => t.id == id)
+  todo.done = !todo.done
+
+  if (!todoList.value.items.some((x) => !x.done)) {
+    document.querySelector('#confetti').click()
+    SwalMixins.alert
+      .fire({
+        title: 'Felicidades',
+        text: 'Completó todos los elementos de la lista. ¿Desea eliminar la lista?',
+        icon: 'success',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          lists.value = lists.value.filter((t) => t.id != currentList.value)
+          currentList.value = lists.value[0]?.id || -1
+          saveToLocalStorage()
+        }
+      })
+  }
+
+  saveToLocalStorage()
 }
 
 const deleteTodo = (id) => {
@@ -65,7 +78,7 @@ const deleteTodo = (id) => {
     cancelEdition()
   }
 
-  swalBsDanger
+  SwalMixins.danger
     .fire({
       title: '¿Estás seguro?',
       text: 'Estás a punto de eliminar este elemento',
@@ -76,7 +89,7 @@ const deleteTodo = (id) => {
     })
     .then((result) => {
       if (result.isConfirmed) {
-        todoList.value = todoList.value.filter((t) => t.id != id)
+        todoList.value.items = todoList.value.items.filter((t) => t.id != id)
         saveToLocalStorage()
       }
     })
@@ -84,7 +97,7 @@ const deleteTodo = (id) => {
 
 const editTodo = (id) => {
   editingId.value = id
-  const todo = todoList.value.find((t) => t.id == id)
+  const todo = todoList.value.items.find((t) => t.id == id)
   newTodoDescription.value = todo.description
   document.querySelector('#new-todo-description').focus()
 }
@@ -94,54 +107,198 @@ const cancelEdition = () => {
   newTodoDescription.value = ''
 }
 
+const someDone = () => {
+  return todoList.value.items.some((x) => x.done)
+}
+
+const isListEmpty = () => {
+  return todoList.value.items.length == 0
+}
+
+const clearDone = () => {
+  SwalMixins.danger
+    .fire({
+      title: '¿Estás seguro?',
+      text: 'Estás a punto de eliminar todos elementos marcados como hechos',
+      icon: 'warning',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        todoList.value.items = todoList.value.items.filter((x) => !x.done)
+        saveToLocalStorage()
+      }
+    })
+}
+
+const clearAll = () => {
+  SwalMixins.danger
+    .fire({
+      title: '¿Estás seguro?',
+      text: 'Estás a punto de eliminar todos elementos de la lista',
+      icon: 'warning',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        todoList.value.items = []
+        saveToLocalStorage()
+      }
+    })
+}
+
+const newList = () => {
+  SwalMixins.alert
+    .fire({
+      title: 'Crear nueva lista',
+      text: 'Descripción de la lista',
+      icon: 'question',
+      confirmButtonText: 'Crear',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      input: 'text'
+    })
+    .then((result) => {
+      if (result.isConfirmed && result.value) {
+        const newList = {
+          id: uuidv4(),
+          description: result.value,
+          items: []
+        }
+
+        lists.value.push(newList)
+        currentList.value = newList.id
+        todoList.value = newList
+        saveToLocalStorage()
+      }
+    })
+}
+
+const deleteList = (listId) => {
+  SwalMixins.danger
+    .fire({
+      title: '¿Estás seguro?',
+      text: 'Estás a punto de eliminar la lista',
+      icon: 'warning',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        lists.value = lists.value.filter((l) => l.id != listId)
+        currentList.value = lists.value[0]?.id || -1
+        saveToLocalStorage()
+      }
+    })
+}
+
+const renameList = (listId) => {
+  const list = lists.value.find((l) => l.id == listId)
+
+  SwalMixins.danger
+    .fire({
+      title: 'Renombrar lista',
+      text: 'Escriba la nueva descripción de la lista',
+      icon: 'question',
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      input: 'text',
+      inputValue: list.description
+    })
+    .then((result) => {
+      if (result.isConfirmed && result.value) {
+        list.description = result.value
+        saveToLocalStorage()
+      }
+    })
+}
+
+function setupConfetti() {
+  confetti.value = new Confetti('confetti')
+  confetti.value.setCount(75)
+  confetti.value.setSize(1)
+  confetti.value.setPower(25)
+  confetti.value.setFade(true)
+  confetti.value.destroyTarget(false)
+}
+
 const saveToLocalStorage = () => {
-  localStorage.setItem('todoList', JSON.stringify(todoList.value))
-  localStorage.setItem('nextId', nextId.value.toString())
+  localStorage.setItem('lists', JSON.stringify(lists.value))
+  localStorage.setItem('lastUsedList', currentList.value)
 }
 
 const getFromLocalStorage = () => {
-  const tl = JSON.parse(localStorage.getItem('todoList'))
-  const nId = JSON.parse(localStorage.getItem('nextId'))
-  console.log(tl)
-  if (tl) {
-    todoList.value = tl
+  const _lists = JSON.parse(localStorage.getItem('lists'))
+  if (_lists) {
+    lists.value = _lists
   }
 
-  if (nId) {
-    nextId.value = nId
+  const lastUsedList = localStorage.getItem('lastUsedList')
+  if (lastUsedList) {
+    currentList.value = lastUsedList
   }
 }
 
+watch(currentList, () => {
+  if (currentList.value == -1) {
+    todoList.value = { id: null, description: null, items: [] }
+  } else {
+    todoList.value = lists.value.find((l) => l.id == currentList.value)
+    document.querySelector('#new-todo-description').focus()
+    saveToLocalStorage()
+  }
+})
+
 onMounted(() => {
+  console.log('mounted')
   getFromLocalStorage()
+
+  setupConfetti()
 })
 </script>
 
 <template>
+  <a id="confetti" href="#" @click.prevent style="display: none">&nbsp;</a>
   <div class="row mt-3">
-    <div class="col-8 col-lg-6 offset-2 offset-lg-3">
+    <div class="col-10 col-lg-6 offset-1 offset-lg-3">
       <form
         @submit.prevent="handleSubmit"
-        class="card shadow mb-3 needs-validation"
+        class="card shadow mb-3 p-1 needs-validation"
         :class="{ 'was-validated': wasValidated }"
         novalidate
       >
-        <div class="row my-3">
-          <div class="offset-2 col-8">
+        <div class="row mb-1">
+          <div class="col-10 offset-1 offset-lg-2 col-lg-8">
             <label>{{ editingId ? 'Editar' : 'Nuevo' }}</label>
             <div class="input-group has-validation">
               <input
-              id="new-todo-description"
-              type="text"
-              class="form-control"
-              :maxlength="maxLength"
-              v-model.trim="newTodoDescription"
-              required
+                id="new-todo-description"
+                type="text"
+                class="form-control"
+                :maxlength="maxLength"
+                v-model.trim="newTodoDescription"
+                required
+                :disabled="currentList == -1"
               />
-              <button type="submit" class="btn btn-primary">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                :class="{ disabled: currentList == -1 }"
+              >
                 <i class="fa-solid fa-check"></i>
               </button>
-              <button type="button" class="btn btn-danger" v-if="editingId" @click.prevent="cancelEdition">
+              <button
+                type="button"
+                class="btn btn-danger"
+                v-if="editingId"
+                @click.prevent="cancelEdition"
+              >
                 <i class="fa-solid fa-xmark"></i>
               </button>
               <small class="invalid-feedback">Campo obligatorio</small>
@@ -149,36 +306,116 @@ onMounted(() => {
             <small>{{ newTodoDescription.length }} / {{ maxLength }}</small>
           </div>
         </div>
-      </form>
-      <div class="row">
-        <div class="col-8">
-          <strong>Descripción</strong>
+        <div class="row mb-1">
+          <div class="col-6 offset-6 col-lg-3 offset-lg-9 mr-1 text-end">
+            <button
+              type="button"
+              class="btn btn-danger"
+              :class="{ disabled: isListEmpty() }"
+              @click="clearAll"
+            >
+              Limpiar lista
+            </button>
+          </div>
         </div>
-        <div class="col-4 text-end">
-          <strong>Acciones</strong>
+        <div class="row mb-1">
+          <div class="col-9 offset-3 col-lg-4 offset-lg-8 mr-1 text-end">
+            <button
+              type="button"
+              class="btn btn-danger"
+              :class="{ disabled: !someDone() }"
+              @click="clearDone"
+            >
+              Eliminar completados
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row mb-2">
+      <div class="col-6">
+        <select class="form-control" v-model="currentList">
+          <option value="-1" v-if="lists.length == 0">No hay listas</option>
+          <option value="-1" v-else>Seleccione una lista</option>
+          <option v-for="list in lists" :key="list.id" :value="list.id">
+            {{ list.description }}
+          </option>
+        </select>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4 col-md-2 offset-md-6">
+            <Transition enter-active-class="animate__animated animate__fadeIn">
+              <button
+                class="btn btn-danger mr-3"
+                @click="deleteList(currentList)"
+                v-if="currentList != -1"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </Transition>
+          </div>
+          <div class="col-4 col-md-2">
+            <Transition enter-active-class="animate__animated animate__fadeIn">
+              <button
+                class="btn btn-primary mr-3"
+                @click="renameList(currentList)"
+                v-if="currentList != -1"
+              >
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </Transition>
+          </div>
+          <div class="col-4 col-md-2">
+            <button class="btn btn-primary mr-3" @click="newList">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
         </div>
       </div>
-      <TransitionGroup
-        enter-active-class="animate__animated animate__fadeIn"
-        leave-active-class="animate__animated animate__fadeOut"
-      >
-        <div class="row my-1" v-for="item in todoList" :key="item.id">
-          <div class="col-lg-8 col-6" @click="markAsDone(item.id)">
-            <div class="w-100 h-100 todo-description">
-              <input type="checkbox" v-model="item.done" />
-              {{ item.description }}
-            </div>
+    </div>
+    <Transition enter-active-class="animate__animated animate__fadeIn">
+      <div class="col-12 offset-lg-2 col-lg-8 text-center mt-3" v-if="currentList && isListEmpty()">
+        <h3>{{ currentList != -1 ? 'La lista está vacía' : 'No hay una lista seleccionada' }}</h3>
+      </div>
+      <div class="col-12 offset-lg-2 col-lg-8" v-else>
+        <div class="row">
+          <div class="col-8">
+            <strong>Descripción</strong>
           </div>
-          <div class="col-lg-4 col-6 text-end">
-            <button class="btn btn-primary" @click="editTodo(item.id)">
-              <i class="fa-solid fa-pen"></i>
-            </button>
-            <button class="btn btn-danger" @click="deleteTodo(item.id)">
-              <i class="fa-solid fa-trash"></i>
-            </button>
+          <div class="col-4 text-end">
+            <strong>Acciones</strong>
           </div>
         </div>
-      </TransitionGroup>
-    </div>
+        <TransitionGroup enter-active-class="animate__animated animate__fadeInUp">
+          <div class="row my-1" v-for="item in todoList.items" :key="item.id">
+            <div class="col-1" @click="markAsDone(item.id)">
+              <input class="d-none" type="checkbox" v-model="item.done" />
+              <span v-if="item.done"><i class="fa-regular fa-square-check"></i></span>
+              <span v-else><i class="fa-regular fa-square"></i></span>
+            </div>
+            <div class="col-7 col-md-8" @click="markAsDone(item.id)">
+              <div class="w-100 h-100 todo-description" :class="{ done: item.done }">
+                {{ item.description }}
+              </div>
+            </div>
+            <div class="col-4 col-md-3">
+              <div class="row">
+                <div class="col-5 col-md-3 offset-md-6">
+                  <button class="btn btn-primary" @click="editTodo(item.id)">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                </div>
+                <div class="col-5 col-md-3">
+                  <button class="btn btn-danger" @click="deleteTodo(item.id)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </TransitionGroup>
+      </div>
+    </Transition>
   </div>
 </template>
