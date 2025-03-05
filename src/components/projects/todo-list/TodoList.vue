@@ -198,6 +198,8 @@ const deleteList = (listId) => {
 }
 
 const renameList = (listId) => {
+  const list = lists.value.find((l) => l.id == listId)
+
   SwalMixins.danger
     .fire({
       title: 'Renombrar lista',
@@ -206,11 +208,11 @@ const renameList = (listId) => {
       confirmButtonText: 'Ok',
       cancelButtonText: 'Cancelar',
       showCancelButton: true,
-      input: 'text'
+      input: 'text',
+      inputValue: list.description
     })
     .then((result) => {
       if (result.isConfirmed && result.value) {
-        const list = lists.value.find((l) => l.id == listId)
         list.description = result.value
         saveToLocalStorage()
       }
