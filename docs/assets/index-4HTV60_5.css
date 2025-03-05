@@ -1,4 +1,4 @@
-@charset "UTF-8";.todo-description:hover{cursor:pointer}.todo-description.done{color:#aaa;text-decoration:line-through}.project{transition:transform .1s ease-in-out}.project:hover{transform:scale(1.05)}/*!
+@charset "UTF-8";.todo-description{line-break:anywhere}.todo-description:hover{cursor:pointer}.todo-description.done{color:#aaa;text-decoration:line-through}.project{transition:transform .1s ease-in-out}.project:hover{transform:scale(1.05)}/*!
  * Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2024 Fonticons, Inc.
