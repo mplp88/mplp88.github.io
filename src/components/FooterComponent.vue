@@ -6,7 +6,8 @@ const year = ref(new Date().getFullYear())
 
 <template>
   <footer class="bg-light text-center">
-    <div class="my-2">Martín Alejandro Ponce Senior Backend / Full Stack Developer</div>
+    <div class="my-2">Martín Alejandro Ponce</div>
+    <div class="my-2">Senior Backend / Full Stack Developer</div>
     <div class="my-2">
       <a href="https://www.linkedin.com/in/mplp88/" target="_blank" style="color: #0e76a8">
         <i class="fa-brands fa-linkedin fa-xl"></i>
