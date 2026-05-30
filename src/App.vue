@@ -6,14 +6,26 @@ import ChatBot from './components/shared/chatbot/ChatBot.vue'
 </script>
 
 <template>
-  <header>
-    <NavBar></NavBar>
-  </header>
-  <main class="container" style="padding-bottom: 120px">
-    <RouterView />
-    <ChatBot></ChatBot>
-  </main>
-  <FooterComponent></FooterComponent>
+  <div class="app-container">
+    <header>
+      <NavBar></NavBar>
+    </header>
+    <main class="container content" style="padding-bottom: 120px">
+      <RouterView />
+      <ChatBot></ChatBot>
+    </main>
+    <FooterComponent></FooterComponent>
+  </div>
 </template>
 
-<style scoped></style>
+<style>
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+</style>
