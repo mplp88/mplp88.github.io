@@ -13,7 +13,7 @@ const collapse = () => {
 
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="/" class="navbar-brand">Portfolio Martín Ponce</a>
+    <RouterLink to="/" class="navbar-brand"> Martín Alejandro Ponce </RouterLink>
     <button
       class="navbar-toggler"
       type="button"
@@ -26,9 +26,6 @@ const collapse = () => {
       <div class="navbar-nav">
         <div class="nav-item">
           <RouterLink class="nav-link" @click="collapse" to="/">Inicio</RouterLink>
-        </div>
-        <div class="nav-item">
-          <RouterLink class="nav-link" @click="collapse" to="/counter">Contador</RouterLink>
         </div>
         <div class="nav-item">
           <RouterLink class="nav-link" @click="collapse" to="/projects">Proyectos</RouterLink>

@@ -19,7 +19,7 @@ const wasValidated = ref(false)
 
 const apiUrl =
   process.env.NODE_ENV === 'development'
-    ? 'http://192.168.1.103:3000'
+    ? 'http://192.168.1.101:3000'
     : 'https://portfolio-api.martinponce.com.ar'
 
 const sendMessage = () => {
@@ -154,11 +154,7 @@ watch(messages, scrollToBottom, { deep: true })
     class="chat-button shadow p-3 m-3 position-fixed bottom-0 end-0 card btn btn-outline-primary"
     ><i class="fa-regular fa-comment"></i
   ></span>
-  <div
-    id="chatbot"
-    class="card shadow p-3 m-3 position-fixed bottom-0 end-0 bg-body-tertiary"
-    v-else
-  >
+  <div id="chatbot" class="card shadow p-3 m-3 position-fixed bottom-0 end-0 bg-light" v-else>
     <div>
       <div class="row">
         <div class="col-10">

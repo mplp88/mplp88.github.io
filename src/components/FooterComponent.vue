@@ -5,22 +5,21 @@ const year = ref(new Date().getFullYear())
 </script>
 
 <template>
-  <footer class="container-fluid fixed-bottom bg-light">
-    <hr />
-    <div class="row my-2">
-      <div class="col-12 text-center">&copy; Copyright Martín Ponce - {{ year }}</div>
+  <footer class="bg-light text-center">
+    <div class="my-2">Martín Alejandro Ponce Senior Backend / Full Stack Developer</div>
+    <div class="my-2">
+      <a href="https://www.linkedin.com/in/mplp88/" target="_blank" style="color: #0e76a8">
+        <i class="fa-brands fa-linkedin fa-xl"></i>
+      </a>
+      |
+      <a href="https://www.github.com/mplp88" target="_blank" style="color: #171515">
+        <i class="fa-brands fa-github fa-xl"></i>
+      </a>
+      |
+      <a href="mailto:martin@martinponce.com.ar" style="color: #000">
+        <i class="fa-solid fa-envelope fa-xl"></i>
+      </a>
     </div>
-    <div class="row my-2">
-      <div class="col-2 offset-4 text-center">
-        <a href="https://www.linkedin.com/in/mplp88/" target="_blank" style="color: #0e76a8">
-          <i class="fa-brands fa-linkedin fa-xl"></i>
-        </a>
-      </div>
-      <div class="col-2 text-center">
-        <a href="https://www.github.com/mplp88" target="_blank" style="color: #171515">
-          <i class="fa-brands fa-github fa-xl"></i>
-        </a>
-      </div>
-    </div>
+    &copy; {{ year }}
   </footer>
 </template>

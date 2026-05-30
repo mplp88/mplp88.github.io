@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import CounterView from '@/views/CounterView.vue'
 import ProjectsView from '@/views/ProjectsView.vue'
 import TodoList from '@/components/projects/todo-list/TodoList.vue'
 
@@ -11,11 +10,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
-    },
-    {
-      path: '/counter',
-      name: 'counter',
-      component: CounterView
     },
     {
       path: '/projects',
