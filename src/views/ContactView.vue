@@ -17,10 +17,11 @@ const apiUrl =
 const formInfo = ref({
   name: '',
   email: '',
+  subject: '',
   message: ''
 })
 
-const sendMessage = () => {
+const sendEmail = () => {
   if (!validate()) return
 
   wasValidated.value = false
@@ -102,71 +103,153 @@ const dismissMessage = () => {
 </script>
 
 <template>
-  <h1>Contacto</h1>
-  <div v-if="messageSent" class="alert alert-success my-3">
-    Mensaje enviado correctamente.
-    <span style="cursor: pointer; float: right" @click="dismissMessage">
-      <i class="fa-solid fa-xmark"></i>
-    </span>
-  </div>
-  <div v-if="error" class="alert alert-danger my-3">
-    {{ error }}
-    <span style="cursor: pointer; float: right" @click="dismissError">
-      <i class="fa-solid fa-xmark"></i>
-    </span>
-  </div>
-  <div v-if="loading" class="alert alert-info">Enviando...</div>
-  <div v-else class="card p-3 shadow">
-    <form class="needs-validation" @submit.prevent="sendMessage" novalidate>
-      <div class="form-floating mb-3">
-        <input
-          class="form-control"
-          :class="{
-            'is-invalid': wasValidated && !isValidName,
-            'is-valid': wasValidated && isValidName
-          }"
-          id="nombre"
-          type="text"
-          placeholder="Nombre"
-          v-model.trim="formInfo.name"
-          required
-        />
-        <label for="nombre">Nombre</label>
-        <small class="invalid-feedback">Campo requerido</small>
+  <div class="container py-5">
+    <div class="row g-5 align-items-start">
+      <!-- Información -->
+      <div class="col-lg-4">
+        <h1 class="mb-3">Contacto</h1>
+
+        <p class="text-secondary">
+          ¿Te interesa trabajar conmigo o querés conversar sobre algún proyecto? Podés escribirme
+          utilizando el formulario o contactarme por cualquiera de estos medios.
+        </p>
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="mb-4 row">
+              <div class="col-7">
+                <h5>
+                  <i class="fa-solid fa-envelope me-2"></i>
+                  Email
+                </h5>
+              </div>
+              <div class="col-5">
+                <a href="/cv.pdf" target="_blank" class="btn btn-outline-primary w-100">
+                  Descargar CV
+                </a>
+              </div>
+              <a href="mailto:martin@martinponce.com.ar" class="text-decoration-none">
+                martin@martinponce.com.ar
+              </a>
+            </div>
+
+            <div class="mb-4">
+              <h5>
+                <i class="fa-brands fa-linkedin me-2"></i>
+                LinkedIn
+              </h5>
+
+              <a
+                href="https://www.linkedin.com/in/mplp88/"
+                target="_blank"
+                class="text-decoration-none"
+              >
+                linkedin.com/in/mplp88
+              </a>
+            </div>
+
+            <div class="mb-4">
+              <h5>
+                <i class="fa-brands fa-github me-2"></i>
+                GitHub
+              </h5>
+
+              <a href="https://github.com/mplp88" target="_blank" class="text-decoration-none">
+                github.com/mplp88
+              </a>
+            </div>
+
+            <div>
+              <h5>
+                <i class="fa-solid fa-location-dot me-2"></i>
+                Ubicación
+              </h5>
+
+              <span>Buenos Aires, Argentina</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-floating mb-3">
-        <input
-          class="form-control"
-          :class="{
-            'is-invalid': wasValidated && !isValidEmail,
-            'is-valid': wasValidated && isValidEmail
-          }"
-          type="email"
-          placeholder="Email"
-          v-model.trim="formInfo.email"
-          required
-        />
-        <label for="email">Email</label>
-        <small class="invalid-feedback">{{ invalidEmailMessage }}</small>
+
+      <!-- Formulario -->
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div v-if="messageSent" class="alert alert-success my-3">
+              Mensaje enviado correctamente.
+              <span style="cursor: pointer; float: right" @click="dismissMessage">
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+            </div>
+            <div v-if="error" class="alert alert-danger my-3">
+              {{ error }}
+              <span style="cursor: pointer; float: right" @click="dismissError">
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+            </div>
+            <div v-if="loading" class="alert alert-info">Enviando...</div>
+            <h3 class="mb-4">Enviar mensaje</h3>
+
+            <form
+              @submit.prevent="sendEmail"
+              novalidate
+              class="needs-validation"
+              :class="{ 'was-validated': wasValidated }"
+            >
+              <div class="mb-3">
+                <label class="form-label">Nombre</label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model.trim="formInfo.name"
+                  required
+                  :disabled="loading"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+
+                <input
+                  type="email"
+                  class="form-control"
+                  v-model.trim="formInfo.email"
+                  required
+                  :disabled="loading"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Asunto</label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model.trim="formInfo.subject"
+                  required
+                  :disabled="loading"
+                />
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label">Mensaje</label>
+
+                <textarea
+                  class="form-control"
+                  rows="6"
+                  v-model.trim="formInfo.message"
+                  required
+                  :disabled="loading"
+                >
+                </textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="form-floating mb-3">
-        <textarea
-          class="form-control"
-          :class="{
-            'is-invalid': wasValidated && !isValidMessage,
-            'is-valid': wasValidated && isValidMessage
-          }"
-          placeholder="Mensaje..."
-          v-model.trim="formInfo.message"
-          row="50"
-          required
-        ></textarea>
-        <label for="nombre">Mensaje</label>
-        <small class="invalid-feedback">Campo requerido</small>
-      </div>
-      <div>
-        <button class="btn btn-primary">Enviar</button>
-      </div>
-    </form>
+    </div>
   </div>
 </template>

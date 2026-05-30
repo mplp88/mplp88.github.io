@@ -1,6 +1,6 @@
 <script setup>
 import Pusher from 'pusher-js'
-import { ref, onMounted, watch } from 'vue'
+import { nextTick, ref, onMounted, watch } from 'vue'
 import SwalMixins from '../sweetalert/swalBs'
 
 const pusher = new Pusher('6bd7c0f7e17261428890', {
@@ -66,7 +66,9 @@ const sendMessage = () => {
   message.value = ''
 }
 
-const scrollToBottom = () => {
+const scrollToBottom = async () => {
+  await nextTick()
+
   if (messagesContainer.value) {
     messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
   }
@@ -144,7 +146,7 @@ onMounted(() => {
   })
 })
 
-watch(messages, scrollToBottom, { deep: true })
+watch(() => messages.value.length, scrollToBottom)
 </script>
 
 <template>
@@ -181,7 +183,7 @@ watch(messages, scrollToBottom, { deep: true })
           v-if="chatBotOnline && receivingMessage"
           class="text-secondary bg-light shadow position-absolute bottom-0 p-1 border"
           style="margin-bottom: 60px"
-          >PonBot está escribiendo...</small
+          >PonBot está pensando...</small
         >
       </div>
       <form
@@ -210,13 +212,19 @@ watch(messages, scrollToBottom, { deep: true })
 </template>
 
 <style scoped>
-#chatbot {
-  margin-bottom: 100px !important;
-}
-
 .chat-button {
-  margin-bottom: 100px !important;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
   border-radius: 50%;
   cursor: pointer;
+  z-index: 1050;
+}
+
+#chatbot {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1050;
 }
 </style>
