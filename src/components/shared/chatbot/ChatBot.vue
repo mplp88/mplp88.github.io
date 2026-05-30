@@ -1,6 +1,6 @@
 <script setup>
 import Pusher from 'pusher-js'
-import { ref, onMounted, watch } from 'vue'
+import { nextTick, ref, onMounted, watch } from 'vue'
 import SwalMixins from '../sweetalert/swalBs'
 
 const pusher = new Pusher('6bd7c0f7e17261428890', {
@@ -66,7 +66,9 @@ const sendMessage = () => {
   message.value = ''
 }
 
-const scrollToBottom = () => {
+const scrollToBottom = async () => {
+  await nextTick()
+
   if (messagesContainer.value) {
     messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
   }
@@ -144,7 +146,7 @@ onMounted(() => {
   })
 })
 
-watch(messages, scrollToBottom, { deep: true })
+watch(() => messages.value.length, scrollToBottom)
 </script>
 
 <template>
