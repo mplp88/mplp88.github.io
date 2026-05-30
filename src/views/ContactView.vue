@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 const loading = ref(false)
-const messageSent = ref(false)
-const error = ref('')
+const message = ref('')
+const error = ref(false)
 const wasValidated = ref(false)
 const isValidName = ref(true)
 const isValidEmail = ref(true)
@@ -26,6 +26,7 @@ const sendEmail = () => {
 
   wasValidated.value = false
   loading.value = true
+  message.value = 'Cargando...'
 
   fetch(`${apiUrl}/email`, {
     method: 'post',
@@ -42,13 +43,17 @@ const sendEmail = () => {
         message: ''
       }
 
-      loading.value = false
-      messageSent.value = true
+      error.value = false
+      message.value = 'Mensaje enviado correctamente.'
     })
     .catch((err) => {
+      message.value = 'Error enviando el mensaje.'
+      error.value = true
+      console.error(`Error: ${err.message}`)
+      console.error(`Data: ${err.data}`)
+    })
+    .finally(() => {
       loading.value = false
-      error.value = err.message
-      console.error(err.data)
     })
 }
 
@@ -93,12 +98,8 @@ const validateEmail = (email) => {
   return valid
 }
 
-const dismissError = () => {
-  error.value = ''
-}
-
 const dismissMessage = () => {
-  messageSent.value = false
+  message.value = ''
 }
 </script>
 
@@ -175,19 +176,6 @@ const dismissMessage = () => {
       <div class="col-lg-8">
         <div class="card shadow-sm">
           <div class="card-body">
-            <div v-if="messageSent" class="alert alert-success my-3">
-              Mensaje enviado correctamente.
-              <span style="cursor: pointer; float: right" @click="dismissMessage">
-                <i class="fa-solid fa-xmark"></i>
-              </span>
-            </div>
-            <div v-if="error" class="alert alert-danger my-3">
-              {{ error }}
-              <span style="cursor: pointer; float: right" @click="dismissError">
-                <i class="fa-solid fa-xmark"></i>
-              </span>
-            </div>
-            <div v-if="loading" class="alert alert-info">Enviando...</div>
             <h3 class="mb-4">Enviar mensaje</h3>
 
             <form
@@ -245,7 +233,31 @@ const dismissMessage = () => {
                 </textarea>
               </div>
 
-              <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+              <div class="row">
+                <div class="col-6">
+                  <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                </div>
+                <div class="col-6">
+                  <div
+                    v-if="message"
+                    class="alert py-1 mb-0"
+                    :class="{
+                      'alert-danger': error,
+                      'alert-success': !error,
+                      'alert-info': loading
+                    }"
+                  >
+                    {{ message }}
+                    <span
+                      v-if="!loading"
+                      style="cursor: pointer; float: right"
+                      @click="dismissMessage"
+                    >
+                      <i class="fa-solid fa-xmark"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
         </div>
