@@ -3,20 +3,11 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <h1>Proyectos</h1>
   <div class="row">
-    <div class="col-10 offset-1 col-md-6 offset-md-0 col-lg-4">
-      <RouterLink
-        to="/projects/todo-list"
-        class="card shadow project"
-        style="text-decoration: none"
-      >
-        <img src="/src/assets/todo_list.png" alt="Todo List Preview" class="card-img-top" />
-        <div class="card-body">
-          <h4 class="card-title">Lista de tareas</h4>
-          <div class="card-text">Aplicación de lista de tareas con guardado en localStorage</div>
-        </div>
-      </RouterLink>
+    <div class="col-10 offset-1 p-4 rounded">
+      <h2>En construcción</h2>
+      <p>¡Pronto habrá proyectos para mostrar!</p>
+      <RouterLink to="/" class="btn btn-primary">Volver al inicio</RouterLink>
     </div>
   </div>
 </template>
