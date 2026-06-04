@@ -94,21 +94,48 @@
     </ul>
   </section>
 
-  <!-- CAPTURES -->
+  <!-- SCREENSHOTS -->
   <section class="container mb-5">
     <h2>Capturas</h2>
 
     <div class="row g-4">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <img
           src="@/assets/projects/free-games-notifier-telegram.png"
           class="img-fluid rounded"
           alt="Telegram Bot"
         />
+        <p class="text-center">Telegram Bot</p>
       </div>
 
-      <div class="col-md-6">
-        <img src="" class="img-fluid rounded shadow" alt="Discord Bot" />
+      <div class="col-md-4">
+        <img
+          src="@/assets/projects/free-games-notifier-discord.png"
+          class="img-fluid rounded shadow"
+          alt="Discord Bot"
+        />
+        <p class="text-center">Discord Bot</p>
+      </div>
+
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <img
+              src="@/assets/projects/free-games-notifier-message.png"
+              class="img-fluid rounded shadow"
+              alt="Message example on Telegram"
+            />
+            <p class="text-center">Message example on Telegram</p>
+          </div>
+          <div class="col-12 mb-3">
+            <img
+              src="@/assets/projects/free-games-notifier-message-2.png"
+              class="img-fluid rounded shadow"
+              alt="Message example on Discord"
+            />
+            <p class="text-center">Message example on Discord</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
