@@ -7,7 +7,6 @@ export default {
 
   home: {
     title: 'Martín Alejandro Ponce',
-    subtitle: 'Full Stack Software Developer',
     description:
       'More than 10 years of experience developing enterprise applications, APIs and scalable solutions for national and international companies.',
     projects: 'View Projects',

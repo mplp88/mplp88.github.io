@@ -16,7 +16,7 @@ const t = (key) => {
     <section class="text-center mb-5">
       <h1 class="display-4 fw-bold">{{ t('home.title') }}</h1>
 
-      <p class="lead text-secondary mb-3">{{ t('home.subtitle') }}</p>
+      <p class="lead text-secondary mb-3">Senior Backend / Full Stack Developer</p>
 
       <p class="fs-5">.NET • Node.js • NestJS • Vue.js</p>
 
