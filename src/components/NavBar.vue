@@ -1,6 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min'
+import { useLanguageStore } from '@/stores/language'
+import { getTranslation } from '@/i18n'
 
 const collapse = () => {
   if (window.innerWidth <= 992) {
@@ -8,6 +10,15 @@ const collapse = () => {
     const bsCollapse = bootstrap.Collapse.getOrCreateInstance(menuToggle, { toggle: false })
     bsCollapse.toggle()
   }
+}
+
+const languageStore = useLanguageStore()
+const t = (key) => {
+  return getTranslation(languageStore.language, key)
+}
+
+const setLanguage = (lang) => {
+  languageStore.setLanguage(lang)
 }
 </script>
 
@@ -25,10 +36,12 @@ const collapse = () => {
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav">
         <div class="nav-item">
-          <RouterLink class="nav-link" @click="collapse" to="/">Inicio</RouterLink>
+          <RouterLink class="nav-link" @click="collapse" to="/">{{ t('navbar.home') }}</RouterLink>
         </div>
         <div class="nav-item">
-          <RouterLink class="nav-link" @click="collapse" to="/projects">Proyectos</RouterLink>
+          <RouterLink class="nav-link" @click="collapse" to="/projects">{{
+            t('navbar.projects')
+          }}</RouterLink>
         </div>
         <!-- nav dropdown example 
       <div class="nav-item dropdown">
@@ -47,8 +60,15 @@ const collapse = () => {
       </div>
       -->
         <div class="nav-item">
-          <RouterLink class="nav-link" @click="collapse" to="/contact">Contacto</RouterLink>
+          <RouterLink class="nav-link" @click="collapse" to="/contact">{{
+            t('navbar.contact')
+          }}</RouterLink>
         </div>
+      </div>
+      <div class="ms-auto">
+        <button class="btn btn-outline-light btn-sm me-2" @click="setLanguage('es')">ES</button>
+
+        <button class="btn btn-outline-light btn-sm" @click="setLanguage('en')">EN</button>
       </div>
     </div>
   </nav>
