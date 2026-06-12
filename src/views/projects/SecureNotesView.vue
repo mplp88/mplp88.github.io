@@ -96,40 +96,28 @@ const closeImage = () => {
   <section class="container mb-5">
     <h2>Arquitectura</h2>
 
-    <div class="row">
-      <div class="col-6">
-        <ul>
-          <li>.NET 8 con Clean Architecture para el backend</li>
-          <li>Next.js con TypeScript para el frontend</li>
-          <li>SQL Server para la base de datos</li>
-          <li>Docker para contenerización y despliegue</li>
-        </ul>
+    <div class="architecture-diagram">
+      <div class="arch-box frontend">
+        <i class="fa-brands fa-react mb-2"></i>
+        <div>Next.js</div>
       </div>
-      <div class="col-6">
-        <div class="architecture-diagram">
-          <div class="arch-box frontend">
-            <i class="fa-brands fa-react mb-2"></i>
-            <div>Next.js</div>
-          </div>
 
-          <div class="arch-arrow">
-            <i class="fa-solid fa-arrow-down"></i>
-          </div>
+      <div class="arch-arrow">
+        <i class="fa-solid fa-arrow-down"></i>
+      </div>
 
-          <div class="arch-box backend">
-            <i class="fa-solid fa-server mb-2"></i>
-            <div>ASP.NET Core API</div>
-          </div>
+      <div class="arch-box backend">
+        <i class="fa-solid fa-server mb-2"></i>
+        <div>ASP.NET Core API</div>
+      </div>
 
-          <div class="arch-arrow">
-            <i class="fa-solid fa-arrow-down"></i>
-          </div>
+      <div class="arch-arrow">
+        <i class="fa-solid fa-arrow-down"></i>
+      </div>
 
-          <div class="arch-box database">
-            <i class="fa-solid fa-database mb-2"></i>
-            <div>SQL Server</div>
-          </div>
-        </div>
+      <div class="arch-box database">
+        <i class="fa-solid fa-database mb-2"></i>
+        <div>SQL Server</div>
       </div>
     </div>
   </section>
