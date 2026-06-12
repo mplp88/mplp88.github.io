@@ -1,4 +1,25 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+import ImageModal from '@/components/shared/ImageModal.vue'
+
+import freeGamesDiscordImg from '@/assets/projects/free-games-notifier-discord.png'
+import freeGamesTelegramImg from '@/assets/projects/free-games-notifier-telegram.png'
+import messageTelegramImg from '@/assets/projects/free-games-notifier-message.png'
+import messageDiscordImg from '@/assets/projects/free-games-notifier-message-2.png'
+
+const selectedImage = ref('')
+const showModal = ref(false)
+
+const openImage = (image) => {
+  selectedImage.value = image
+  showModal.value = true
+}
+
+const closeImage = () => {
+  selectedImage.value = ''
+  showModal.value = false
+}
+</script>
 
 <template>
   <!-- HERO -->
@@ -99,39 +120,43 @@
     <h2>Capturas</h2>
 
     <div class="row g-4">
-      <div class="col-md-4">
+      <div class="col-md-4 screenshot">
         <img
-          src="@/assets/projects/free-games-notifier-telegram.png"
+          :src="freeGamesTelegramImg"
           class="img-fluid rounded"
           alt="Telegram Bot"
+          @click="openImage(freeGamesTelegramImg)"
         />
         <p class="text-center">Telegram Bot</p>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-4 screenshot">
         <img
-          src="@/assets/projects/free-games-notifier-discord.png"
+          :src="freeGamesDiscordImg"
           class="img-fluid rounded shadow"
           alt="Discord Bot"
+          @click="openImage(freeGamesDiscordImg)"
         />
         <p class="text-center">Discord Bot</p>
       </div>
 
       <div class="col-md-4">
         <div class="row">
-          <div class="col-12 mb-3">
+          <div class="col-12 mb-3 screenshot">
             <img
-              src="@/assets/projects/free-games-notifier-message.png"
+              :src="messageTelegramImg"
               class="img-fluid rounded shadow"
               alt="Message example on Telegram"
+              @click="openImage(messageTelegramImg)"
             />
             <p class="text-center">Message example on Telegram</p>
           </div>
-          <div class="col-12 mb-3">
+          <div class="col-12 mb-3 screenshot">
             <img
-              src="@/assets/projects/free-games-notifier-message-2.png"
+              :src="messageDiscordImg"
               class="img-fluid rounded shadow"
               alt="Message example on Discord"
+              @click="openImage(messageDiscordImg)"
             />
             <p class="text-center">Message example on Discord</p>
           </div>
@@ -175,4 +200,6 @@
       </a>
     </div>
   </section>
+
+  <ImageModal :show="showModal" :image="selectedImage" @close="closeImage" />
 </template>
