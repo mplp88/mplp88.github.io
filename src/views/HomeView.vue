@@ -1,46 +1,54 @@
-<script setup></script>
+<script setup>
+import { computed } from 'vue'
+import { useLanguageStore } from '@/stores/language'
+import { getTranslation } from '@/i18n'
+
+const languageStore = useLanguageStore()
+
+const t = (key) => {
+  return getTranslation(languageStore.language, key)
+}
+</script>
 
 <template>
   <div class="container py-5">
     <!-- Hero -->
     <section class="text-center mb-5">
-      <h1 class="display-4 fw-bold">Martín Alejandro Ponce</h1>
+      <h1 class="display-4 fw-bold">{{ t('home.title') }}</h1>
 
       <p class="lead text-secondary mb-3">Senior Backend / Full Stack Developer</p>
 
       <p class="fs-5">.NET • Node.js • NestJS • Vue.js</p>
 
       <p class="col-lg-8 mx-auto">
-        Más de 10 años desarrollando aplicaciones empresariales, APIs y soluciones escalables para
-        compañías nacionales e internacionales.
+        {{ t('home.description') }}
       </p>
 
       <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
-        <RouterLink to="/projects" class="btn btn-primary"> Ver Proyectos </RouterLink>
+        <RouterLink to="/projects" class="btn btn-primary"> {{ t('home.projects') }} </RouterLink>
 
-        <a href="/cv.pdf" target="_blank" class="btn btn-outline-secondary"> Descargar CV </a>
+        <a :href="t('home.cvUrl')" target="_blank" class="btn btn-outline-secondary">
+          {{ t('home.cv') }}
+        </a>
       </div>
     </section>
 
     <!-- About -->
     <section class="mb-5">
-      <h2 class="mb-4">Sobre mí</h2>
+      <h2 class="mb-4">{{ t('home.aboutMe') }}</h2>
 
       <div class="card">
         <div class="card-body">
           <p>
-            Soy desarrollador Full Stack con más de 10 años de experiencia participando en proyectos
-            de desarrollo, modernización y evolución de sistemas empresariales.
+            {{ t('home.about1') }}
           </p>
 
           <p>
-            Mi foco principal está en el desarrollo backend utilizando .NET y Node.js, diseño de
-            APIs REST, arquitecturas basadas en microservicios e integración de sistemas.
+            {{ t('home.about2') }}
           </p>
 
           <p class="mb-0">
-            También cuento con experiencia en frontend utilizando Vue.js, trabajando junto a equipos
-            multidisciplinarios en entornos ágiles.
+            {{ t('home.about3') }}
           </p>
         </div>
       </div>
@@ -48,7 +56,7 @@
 
     <!-- Skills -->
     <section class="mb-5">
-      <h2 class="mb-4">Tecnologías principales</h2>
+      <h2 class="mb-4">{{ t('home.technologies') }}</h2>
 
       <div class="row g-4">
         <div class="col-md-6 col-lg-3">
@@ -84,7 +92,7 @@
         <div class="col-md-6 col-lg-3">
           <div class="card h-100">
             <div class="card-body">
-              <h5 class="card-title">Bases de Datos</h5>
+              <h5 class="card-title">{{ t('home.databases') }}</h5>
 
               <ul class="mb-0">
                 <li>SQL Server</li>
@@ -115,13 +123,13 @@
 
     <!-- CTA -->
     <section class="text-center py-5">
-      <h2>¿Te interesa trabajar conmigo?</h2>
+      <h2>{{ t('home.cta') }}</h2>
 
       <p class="text-secondary">
-        Actualmente me encuentro abierto a nuevas oportunidades como Backend o Full Stack Developer.
+        {{ t('home.ctaDescription') }}
       </p>
 
-      <RouterLink to="/contact" class="btn btn-success"> Contactame </RouterLink>
+      <RouterLink to="/contact" class="btn btn-success"> {{ t('home.contactMe') }} </RouterLink>
     </section>
   </div>
 </template>
