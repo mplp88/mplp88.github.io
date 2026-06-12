@@ -18,3 +18,12 @@
 .project:hover {
   transform: scale(1.05);
 }
+
+.screenshot {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.screenshot:hover {
+  transform: scale(1.02);
+}
