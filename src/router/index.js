@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProjectsView from '@/views/ProjectsView.vue'
 import TodoList from '@/components/projects/todo-list/TodoList.vue'
+import FreeGamesNotifierView from '@/views/projects/FreeGamesNotifierView.vue'
+import SecureNotesView from '@/views/projects/SecureNotesView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -20,6 +22,16 @@ const router = createRouter({
       path: '/projects/todo-list',
       name: 'todoList',
       component: TodoList
+    },
+    {
+      path: '/projects/free-games-notifier',
+      name: 'freeGamesNotifier',
+      component: FreeGamesNotifierView
+    },
+    {
+      path: '/projects/secure-notes',
+      name: 'secureNotes',
+      component: SecureNotesView
     },
     {
       path: '/contact',
