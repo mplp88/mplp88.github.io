@@ -105,6 +105,7 @@ export default {
     interested:
       'Are you interested in working with me or would you like to discuss a project? You can write to me using the form or contact me through any of these means.',
     cv: 'Download CV',
+    cvUrl: '/cv_en.pdf',
     location: 'Location',
     form: {
       name: 'Name',
