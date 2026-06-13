@@ -80,7 +80,7 @@ export default {
         line2:
           'El proyecto fue desarrollado como una Proof of Concept para demostrar conocimientos en desarrollo Full Stack moderno, seguridad de aplicaciones, rendering en Next.js y arquitectura limpia en .NET.'
       },
-      functionalities: {
+      features: {
         first: {
           title: '🔐 Autenticación',
           description:
