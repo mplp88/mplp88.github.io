@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue'
 import { useLanguageStore } from '@/stores/language'
 import { getTranslation } from '@/i18n'
 
@@ -40,15 +39,15 @@ const t = (key) => {
       <div class="card">
         <div class="card-body">
           <p>
-            {{ t('home.about1') }}
+            {{ t('home.about.line1') }}
           </p>
 
           <p>
-            {{ t('home.about2') }}
+            {{ t('home.about.line2') }}
           </p>
 
           <p class="mb-0">
-            {{ t('home.about3') }}
+            {{ t('home.about.line3') }}
           </p>
         </div>
       </div>

@@ -1,10 +1,19 @@
 <script setup>
 import { ref } from 'vue'
+import { useLanguageStore } from '@/stores/language'
+import { getTranslation } from '@/i18n'
+
 import ImageModal from '@/components/shared/ImageModal.vue'
 
 import homeImg from '@/assets/projects/secure-notes-home.png'
 import loginImg from '@/assets/projects/secure-notes-login.png'
 import exampleImg from '@/assets/projects/secure-notes-example.png'
+
+const languageStore = useLanguageStore()
+
+const t = (key) => {
+  return getTranslation(languageStore.language, key)
+}
 
 const selectedImage = ref('')
 const showModal = ref(false)
@@ -26,37 +35,33 @@ const closeImage = () => {
       <h1 class="display-5 fw-bold mb-3">🛡️ Secure Notes</h1>
 
       <p class="lead">
-        Aplicación Full Stack desarrollada como Proof of Concept para demostrar buenas prácticas de
-        seguridad, Clean Architecture y despliegue mediante Docker.
+        {{ t('projects.secureNotes.shortDescription') }}
       </p>
     </div>
   </section>
 
   <section class="container mb-5">
-    <h2>Descripción</h2>
+    <h2>{{ t('projects.descriptionTitle') }}</h2>
 
     <p>
-      Secure Notes es una aplicación que permite a los usuarios registrarse, autenticarse y
-      almacenar notas privadas de forma segura.
+      {{ t('projects.secureNotes.description.line1') }}
     </p>
 
     <p>
-      El proyecto fue desarrollado como una Proof of Concept para demostrar conocimientos en
-      desarrollo Full Stack moderno, seguridad de aplicaciones, rendering en Next.js y arquitectura
-      limpia en .NET.
+      {{ t('projects.secureNotes.description.line2') }}
     </p>
   </section>
 
   <section class="container mb-5">
-    <h2>Funcionalidades</h2>
+    <h2>{{ t('projects.featuresTitle') }}</h2>
 
     <div class="row g-4">
       <div class="col-md-6">
         <div class="card h-100">
           <div class="card-body">
-            <h5>🔐 Autenticación</h5>
+            <h5>{{ t('projects.secureNotes.features.first.title') }}</h5>
 
-            <p>Registro y login de usuarios utilizando almacenamiento seguro de credenciales.</p>
+            <p>{{ t('projects.secureNotes.features.first.description') }}</p>
           </div>
         </div>
       </div>
@@ -64,9 +69,9 @@ const closeImage = () => {
       <div class="col-md-6">
         <div class="card h-100">
           <div class="card-body">
-            <h5>📝 Gestión de notas</h5>
+            <h5>{{ t('projects.secureNotes.features.second.title') }}</h5>
 
-            <p>Creación, visualización y administración de notas privadas.</p>
+            <p>{{ t('projects.secureNotes.features.second.description') }}</p>
           </div>
         </div>
       </div>
@@ -74,9 +79,9 @@ const closeImage = () => {
       <div class="col-md-6">
         <div class="card h-100">
           <div class="card-body">
-            <h5>🔒 Encriptación</h5>
+            <h5>{{ t('projects.secureNotes.features.third.title') }}</h5>
 
-            <p>El contenido de las notas se almacena encriptado a nivel de aplicación.</p>
+            <p>{{ t('projects.secureNotes.features.third.description') }}</p>
           </div>
         </div>
       </div>
@@ -84,9 +89,9 @@ const closeImage = () => {
       <div class="col-md-6">
         <div class="card h-100">
           <div class="card-body">
-            <h5>🐳 Docker</h5>
+            <h5>{{ t('projects.secureNotes.features.fourth.title') }}</h5>
 
-            <p>Todo el stack puede levantarse mediante Docker Compose.</p>
+            <p>{{ t('projects.secureNotes.features.fourth.description') }}</p>
           </div>
         </div>
       </div>
@@ -94,7 +99,7 @@ const closeImage = () => {
   </section>
 
   <section class="container mb-5">
-    <h2>Arquitectura</h2>
+    <h2>{{ t('projects.architectureTitle') }}</h2>
 
     <div class="architecture-diagram">
       <div class="arch-box frontend">
@@ -123,7 +128,7 @@ const closeImage = () => {
   </section>
 
   <section class="container mb-5">
-    <h2>Capturas</h2>
+    <h2>{{ t('projects.screenshotsTitle') }}</h2>
 
     <div class="row g-4">
       <div class="col-md-4">
@@ -154,7 +159,7 @@ const closeImage = () => {
   </section>
 
   <section class="container mb-5">
-    <h2>Tecnologías utilizadas</h2>
+    <h2>{{ t('projects.usedTechnologieTitle') }}</h2>
 
     <div class="d-flex flex-wrap gap-2">
       <span class="badge bg-primary">.NET</span>
@@ -168,7 +173,7 @@ const closeImage = () => {
   </section>
 
   <section class="container mb-5">
-    <h2>Enlaces</h2>
+    <h2>{{ t('projects.linksTitle') }}</h2>
 
     <div class="d-flex gap-3">
       <a href="https://github.com/mplp88/pon-secure-notes" target="_blank" class="btn btn-dark">
