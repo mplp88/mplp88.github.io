@@ -171,7 +171,7 @@ const dismissMessage = () => {
             <div>
               <h5>
                 <i class="fa-solid fa-location-dot me-2"></i>
-                Ubicación
+                {{ t('contact.location') }}
               </h5>
 
               <span>Buenos Aires, Argentina</span>
