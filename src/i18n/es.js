@@ -104,6 +104,14 @@ export default {
 
   contact: {
     title: 'Contacto',
-    send: 'Enviar mensaje'
+    send: 'Enviar mensaje',
+    interested:
+      '¿Te interesa trabajar conmigo o querés conversar sobre algún proyecto? Podés escribirme utilizando el formulario o contactarme por cualquiera de estos medios.',
+    cv: 'Descargar CV',
+    form: {
+      name: 'Nombre',
+      subject: 'Asunto',
+      message: 'Mensaje'
+    }
   }
 }
