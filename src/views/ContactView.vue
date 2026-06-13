@@ -133,7 +133,7 @@ const dismissMessage = () => {
                 </h5>
               </div>
               <div class="col-5">
-                <a href="/cv.pdf" target="_blank" class="btn btn-outline-primary w-100">
+                <a :href="t('contact.cvUrl')" target="_blank" class="btn btn-outline-primary w-100">
                   {{ t('contact.cv') }}
                 </a>
               </div>
