@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useLanguageStore } from '@/stores/language'
+import { getTranslation } from '@/i18n'
+
 const loading = ref(false)
 const message = ref('')
 const error = ref(false)
@@ -13,6 +16,12 @@ const apiUrl =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
     : 'https://portfolio-api.martinponce.com.ar'
+
+const languageStore = useLanguageStore()
+
+const t = (key) => {
+  return getTranslation(languageStore.language, key)
+}
 
 const formInfo = ref({
   name: '',
@@ -108,11 +117,10 @@ const dismissMessage = () => {
     <div class="row g-5 align-items-start">
       <!-- Información -->
       <div class="col-lg-4">
-        <h1 class="mb-3">Contacto</h1>
+        <h1 class="mb-3">{{ t('contact.title') }}</h1>
 
         <p class="text-secondary">
-          ¿Te interesa trabajar conmigo o querés conversar sobre algún proyecto? Podés escribirme
-          utilizando el formulario o contactarme por cualquiera de estos medios.
+          {{ t('contact.interested') }}
         </p>
 
         <div class="card shadow-sm">
@@ -126,7 +134,7 @@ const dismissMessage = () => {
               </div>
               <div class="col-5">
                 <a href="/cv.pdf" target="_blank" class="btn btn-outline-primary w-100">
-                  Descargar CV
+                  {{ t('contact.cv') }}
                 </a>
               </div>
               <a href="mailto:martin@martinponce.com.ar" class="text-decoration-none">
@@ -176,7 +184,7 @@ const dismissMessage = () => {
       <div class="col-lg-8">
         <div class="card shadow-sm">
           <div class="card-body">
-            <h3 class="mb-4">Enviar mensaje</h3>
+            <h3 class="mb-4">{{ t('contact.send') }}</h3>
 
             <form
               @submit.prevent="sendEmail"
@@ -185,7 +193,7 @@ const dismissMessage = () => {
               :class="{ 'was-validated': wasValidated }"
             >
               <div class="mb-3">
-                <label class="form-label">Nombre</label>
+                <label class="form-label">{{ t('contact.form.name') }}</label>
 
                 <input
                   type="text"
@@ -209,7 +217,7 @@ const dismissMessage = () => {
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Asunto</label>
+                <label class="form-label">{{ t('contact.form.subject') }}</label>
 
                 <input
                   type="text"
@@ -221,7 +229,7 @@ const dismissMessage = () => {
               </div>
 
               <div class="mb-4">
-                <label class="form-label">Mensaje</label>
+                <label class="form-label">{{ t('contact.form.message') }}</label>
 
                 <textarea
                   class="form-control"
@@ -235,7 +243,7 @@ const dismissMessage = () => {
 
               <div class="row">
                 <div class="col-6">
-                  <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                  <button type="submit" class="btn btn-primary">{{ t('contact.send') }}</button>
                 </div>
                 <div class="col-6">
                   <div
