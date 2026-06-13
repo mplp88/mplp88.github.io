@@ -1,5 +1,13 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useLanguageStore } from '@/stores/language'
+import { getTranslation } from '@/i18n'
+
+const languageStore = useLanguageStore()
+
+const t = (key) => {
+  return getTranslation(languageStore.language, key)
+}
 </script>
 
 <template>
@@ -18,8 +26,7 @@ import { RouterLink } from 'vue-router'
               <h5 class="card-title">🎮 Free Games Notifier</h5>
 
               <p class="card-text">
-                Sistema de monitoreo y notificaciones automáticas para juegos gratuitos en Epic
-                Games Store y Steam. Disponible para Telegram y Discord.
+                {{ t('projects.freeGamesNotifier.shortDescription') }}
               </p>
 
               <div class="mb-3">
@@ -31,7 +38,7 @@ import { RouterLink } from 'vue-router'
               </div>
 
               <RouterLink to="/projects/free-games-notifier" class="btn btn-primary mt-auto">
-                Ver proyecto
+                {{ t('projects.viewProject') }}
               </RouterLink>
             </div>
           </div>
@@ -48,8 +55,7 @@ import { RouterLink } from 'vue-router'
               <h5 class="card-title">🛡️ Secure Notes</h5>
 
               <p class="card-text">
-                Proof of Concept enfocada en seguridad, arquitectura limpia y dockerización
-                completa. Permite almacenar notas encriptadas y gestionar usuarios autenticados.
+                {{ t('projects.secureNotes.shortDescription') }}
               </p>
 
               <div class="mb-3">
@@ -61,7 +67,7 @@ import { RouterLink } from 'vue-router'
               </div>
 
               <RouterLink to="/projects/secure-notes" class="btn btn-primary mt-auto">
-                Ver proyecto
+                {{ t('projects.viewProject') }}
               </RouterLink>
             </div>
           </div>
@@ -73,11 +79,10 @@ import { RouterLink } from 'vue-router'
             >
               <i class="fa-solid fa-code fa-3x text-secondary mb-3"></i>
 
-              <h5 class="card-title">Más proyectos próximamente</h5>
+              <h5 class="card-title">{{ t('projects.moreComing') }}</h5>
 
               <p class="card-text text-secondary">
-                Actualmente estoy incorporando nuevos proyectos personales y pruebas de concepto al
-                portfolio.
+                {{ t('projects.workInProgress') }}
               </p>
             </div>
           </div>
