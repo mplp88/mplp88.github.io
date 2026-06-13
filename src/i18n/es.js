@@ -108,6 +108,7 @@ export default {
     interested:
       '¿Te interesa trabajar conmigo o querés conversar sobre algún proyecto? Podés escribirme utilizando el formulario o contactarme por cualquiera de estos medios.',
     cv: 'Descargar CV',
+    location: 'Ubicación',
     form: {
       name: 'Nombre',
       subject: 'Asunto',
