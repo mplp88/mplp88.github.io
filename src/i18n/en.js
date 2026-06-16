@@ -31,9 +31,10 @@ export default {
 
   projects: {
     viewProject: 'View project',
-    moreComing: 'More projects coming',
+    viewGitHub: 'View GitHub',
+    moreComing: '🚀 More Projects & Experiments on GitHub',
     workInProgress:
-      'I am currently adding new personal projects and proofs of concept to my portfolio.',
+      'Beyond the featured projects showcased in this portfolio, I maintain public repositories with Proofs of Concept, templates, automation tools, and technical experiments built using a variety of technologies. Feel free to explore my GitHub profile to discover additional projects and see how I approach software development.',
     descriptionTitle: 'Description',
     featuresTitle: 'Features',
     architectureTitle: 'Architecture',

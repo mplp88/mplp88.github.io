@@ -74,16 +74,20 @@ const t = (key) => {
         </div>
         <div class="col-md-6 col-xl-4">
           <div class="card shadow-sm h-100 border-dashed">
-            <div
-              class="card-body d-flex flex-column justify-content-center align-items-center text-center"
-            >
-              <i class="fa-solid fa-code fa-3x text-secondary mb-3"></i>
+            <div class="card-body d-flex flex-column text-center">
+              <span class="my-4">
+                <i class="fa-solid fa-code fa-3x text-secondary mb-3"></i>
+              </span>
 
               <h5 class="card-title">{{ t('projects.moreComing') }}</h5>
 
               <p class="card-text text-secondary">
                 {{ t('projects.workInProgress') }}
               </p>
+              <a href="https://github.com/mplp88" target="_blank" class="btn btn-dark mt-auto">
+                <i class="fa-brands fa-github me-2"></i>
+                {{ t('projects.viewGitHub') }}
+              </a>
             </div>
           </div>
         </div>
