@@ -126,17 +126,11 @@ const dismissMessage = () => {
         <div class="card shadow-sm">
           <div class="card-body">
             <div class="mb-4 row">
-              <div class="col-7">
-                <h5>
-                  <i class="fa-solid fa-envelope me-2"></i>
-                  Email
-                </h5>
-              </div>
-              <div class="col-5">
-                <a :href="t('contact.cvUrl')" target="_blank" class="btn btn-outline-primary w-100">
-                  {{ t('contact.cv') }}
-                </a>
-              </div>
+              <h5>
+                <i class="fa-solid fa-envelope me-2"></i>
+                Email
+              </h5>
+
               <a href="mailto:martin@martinponce.com.ar" class="text-decoration-none">
                 martin@martinponce.com.ar
               </a>
@@ -168,13 +162,18 @@ const dismissMessage = () => {
               </a>
             </div>
 
-            <div>
+            <div class="mb-4">
               <h5>
                 <i class="fa-solid fa-location-dot me-2"></i>
                 {{ t('contact.location') }}
               </h5>
 
               <span>Buenos Aires, Argentina</span>
+            </div>
+            <div>
+              <a :href="t('contact.cvUrl')" target="_blank" class="btn btn-outline-primary w-100">
+                {{ t('contact.cv') }}
+              </a>
             </div>
           </div>
         </div>
