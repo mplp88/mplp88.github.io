@@ -26,7 +26,7 @@ const t = (key) => {
       <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
         <RouterLink to="/projects" class="btn btn-primary"> {{ t('home.projects') }} </RouterLink>
 
-        <a :href="t('home.cvUrl')" target="_blank" class="btn btn-outline-secondary">
+        <a :href="t('home.cvUrl')" target="_blank" class="btn btn-outline-secondary" download>
           {{ t('home.cv') }}
         </a>
       </div>

@@ -11,7 +11,7 @@ export default {
       'More than 10 years of experience developing enterprise applications, APIs and scalable solutions for national and international companies.',
     projects: 'View Projects',
     cv: 'Download CV',
-    cvUrl: '/cv_en.pdf',
+    cvUrl: '/cv_en.pdf?v=20260808',
     aboutMe: 'About Me',
     about: {
       line1:
