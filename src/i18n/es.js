@@ -11,7 +11,7 @@ export default {
       'Más de 10 años desarrollando aplicaciones empresariales, APIs y soluciones escalables para compañías nacionales e internacionales.',
     projects: 'Ver Proyectos',
     cv: 'Descargar CV',
-    cvUrl: '/cv_es.pdf',
+    cvUrl: '/cv_es.pdf?v=20260808',
     aboutMe: 'Sobre mí',
     about: {
       line1:
