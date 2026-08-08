@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "node build.js",
-    "viteBuild": "vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
