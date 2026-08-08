@@ -17,27 +17,26 @@ const t = (key) => {
         <div class="col-md-6 col-xl-4">
           <div class="card shadow-sm h-100">
             <img
-              src="@/assets/projects/free-games-notifier-cover.webp"
+              src="@/assets/projects/maternidad-emociones-home.png"
               class="card-img-top"
-              alt="Free Games Notifier"
+              alt="Secure Notes"
             />
-
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title">🎮 Free Games Notifier</h5>
+              <h5 class="card-title">💜 Maternidad y Emociones</h5>
 
               <p class="card-text">
-                {{ t('projects.freeGamesNotifier.shortDescription') }}
+                {{ t('projects.maternidadEmociones.shortDescription') }}
               </p>
 
               <div class="mb-3">
+                <span class="badge bg-success me-1">Vue 3</span>
                 <span class="badge bg-primary me-1">Node.js</span>
-                <span class="badge bg-secondary me-1">SQLite</span>
-                <span class="badge bg-success me-1">Discord</span>
-                <span class="badge bg-info text-dark me-1">Telegram</span>
-                <span class="badge bg-dark">Puppeteer</span>
+                <span class="badge bg-info text-dark me-1">MongoDB</span>
+                <span class="badge bg-secondary me-1">Pinia</span>
+                <span class="badge bg-dark">JWT</span>
               </div>
 
-              <RouterLink to="/projects/free-games-notifier" class="btn btn-primary mt-auto">
+              <RouterLink to="/projects/maternidad-y-emociones" class="btn btn-primary mt-auto">
                 {{ t('projects.viewProject') }}
               </RouterLink>
             </div>
@@ -67,6 +66,91 @@ const t = (key) => {
               </div>
 
               <RouterLink to="/projects/secure-notes" class="btn btn-primary mt-auto">
+                {{ t('projects.viewProject') }}
+              </RouterLink>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card shadow-sm h-100">
+            <img
+              src="@/assets/projects/clean-users-api-cover.png"
+              class="card-img-top"
+              alt="Secure Notes"
+            />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">🧱 Clean Users API</h5>
+
+              <p class="card-text">
+                {{ t('projects.cleanUsersApi.shortDescription') }}
+              </p>
+
+              <div class="mb-3">
+                <span class="badge bg-primary me-1">.NET 8</span>
+                <span class="badge bg-secondary me-1">C#</span>
+                <span class="badge bg-success me-1">EF Core</span>
+                <span class="badge bg-info text-dark me-1">SQL Server</span>
+                <span class="badge bg-dark">Clean Architecture</span>
+              </div>
+
+              <RouterLink to="/projects/clean-users-api" class="btn btn-primary mt-auto">
+                {{ t('projects.viewProject') }}
+              </RouterLink>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card shadow-sm h-100">
+            <img
+              src="@/assets/projects/professional-vue-landing-cover.png"
+              class="card-img-top"
+              alt="Secure Notes"
+            />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">🎨 Professional Vue Landing Page</h5>
+
+              <p class="card-text">
+                {{ t('projects.landingPageTemplate.shortDescription') }}
+              </p>
+
+              <div class="mb-3">
+                <span class="badge bg-success me-1">Vue 3</span>
+                <span class="badge bg-primary me-1">Vite</span>
+                <span class="badge bg-info text-dark me-1">TailwindCSS</span>
+                <span class="badge bg-secondary me-1">Pinia</span>
+                <span class="badge bg-dark">Vue Router</span>
+              </div>
+
+              <RouterLink to="/projects/landing-page-template" class="btn btn-primary mt-auto">
+                {{ t('projects.viewProject') }}
+              </RouterLink>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="card shadow-sm h-100">
+            <img
+              src="@/assets/projects/free-games-notifier-cover.webp"
+              class="card-img-top"
+              alt="Free Games Notifier"
+            />
+
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">🎮 Free Games Notifier</h5>
+
+              <p class="card-text">
+                {{ t('projects.freeGamesNotifier.shortDescription') }}
+              </p>
+
+              <div class="mb-3">
+                <span class="badge bg-primary me-1">Node.js</span>
+                <span class="badge bg-secondary me-1">SQLite</span>
+                <span class="badge bg-success me-1">Discord</span>
+                <span class="badge bg-info text-dark me-1">Telegram</span>
+                <span class="badge bg-dark">Puppeteer</span>
+              </div>
+
+              <RouterLink to="/projects/free-games-notifier" class="btn btn-primary mt-auto">
                 {{ t('projects.viewProject') }}
               </RouterLink>
             </div>

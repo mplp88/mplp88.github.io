@@ -4,6 +4,9 @@ import ProjectsView from '@/views/ProjectsView.vue'
 import TodoList from '@/components/projects/todo-list/TodoList.vue'
 import FreeGamesNotifierView from '@/views/projects/FreeGamesNotifierView.vue'
 import SecureNotesView from '@/views/projects/SecureNotesView.vue'
+import CleanUsersApiView from '@/views/projects/CleanUsersApiView.vue'
+import ProfessionalVueLandingView from '@/views/projects/ProfessionalVueLandingView.vue'
+import MaternidadEmocionesView from '@/views/projects/MaternidadEmocionesView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -32,6 +35,21 @@ const router = createRouter({
       path: '/projects/secure-notes',
       name: 'secureNotes',
       component: SecureNotesView
+    },
+    {
+      path: '/projects/clean-users-api',
+      name: 'cleanUsersApiView',
+      component: CleanUsersApiView
+    },
+    {
+      path: '/projects/landing-page-template',
+      name: 'landingPageTemplate',
+      component: ProfessionalVueLandingView
+    },
+    {
+      path: '/projects/maternidad-y-emociones',
+      name: 'maternidadEmocionesView',
+      component: MaternidadEmocionesView
     },
     {
       path: '/contact',
