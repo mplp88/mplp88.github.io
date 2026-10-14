@@ -102,7 +102,7 @@ const t = (key) => {
         <div class="col-md-6 col-xl-4">
           <div class="card shadow-sm h-100">
             <img
-              src="@/assets/projects/professional-vue-landing-cover.png"
+              src="@/assets/projects/professional-vue-landing-cover.jpg"
               class="card-img-top"
               alt="Secure Notes"
             />

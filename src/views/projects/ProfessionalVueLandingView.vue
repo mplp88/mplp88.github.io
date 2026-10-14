@@ -5,9 +5,9 @@ import { getTranslation } from '@/i18n'
 
 import ImageModal from '@/components/shared/ImageModal.vue'
 
-import homeImg from '@/assets/projects/professional-vue-landing-home.png'
-import aboutImg from '@/assets/projects/professional-vue-landing-about.png'
-import servicesImg from '@/assets/projects/professional-vue-landing-services.png'
+import homeImg from '@/assets/projects/professional-vue-landing-home.jpg'
+import aboutImg from '@/assets/projects/professional-vue-landing-about.jpg'
+import servicesImg from '@/assets/projects/professional-vue-landing-services.jpg'
 
 const languageStore = useLanguageStore()
 

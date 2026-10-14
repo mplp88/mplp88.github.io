@@ -18,6 +18,7 @@ languageStore.getInitialLanguage()
       <RouterView />
     </main>
     <FooterComponent></FooterComponent>
+    <!--<ChatBot></ChatBot>-->
   </div>
 </template>
 
