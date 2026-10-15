@@ -13,6 +13,8 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
+    "dompurify": "^3.4.17",
+    "markdown-it": "^15.0.2",
     "pinia": "^2.1.7",
     "pusher-js": "^8.4.0-rc2",
     "sweetalert2": "^11.14.2",
