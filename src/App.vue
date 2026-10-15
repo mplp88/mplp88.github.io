@@ -2,7 +2,7 @@
 import NavBar from './components/NavBar.vue'
 import { RouterView } from 'vue-router'
 import FooterComponent from './components/FooterComponent.vue'
-import ChatBot from './components/shared/chatbot/ChatBot.vue' //TODO: Fix and translate ChatBot
+import ChatBot from './components/shared/chatbot/ChatBot.vue'
 import { useLanguageStore } from '@/stores/language'
 
 const languageStore = useLanguageStore()
