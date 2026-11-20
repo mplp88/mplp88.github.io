@@ -130,7 +130,7 @@ const t = (key) => {
         <div class="col-md-6 col-xl-4">
           <div class="card shadow-sm h-100">
             <img
-              src="@/assets/projects/free-games-notifier-cover.webp"
+              src="@/assets/projects/free-games-notifier-cover.png"
               class="card-img-top"
               alt="Free Games Notifier"
             />

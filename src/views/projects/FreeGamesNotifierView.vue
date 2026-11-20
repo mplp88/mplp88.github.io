@@ -189,6 +189,13 @@ const closeImage = () => {
     <h2>{{ t('projects.linksTitle') }}</h2>
 
     <div class="d-flex flex-wrap gap-3">
+      <a
+        href="https://free-games-notifier.martinponce.com.ar"
+        target="_blank"
+        class="btn btn-secondary"
+      >
+        Web
+      </a>
       <a href="https://t.me/PonEpicNotifierBot" target="_blank" class="btn btn-info"> Telegram </a>
 
       <a
